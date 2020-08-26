@@ -1,0 +1,7 @@
+.vscode
+dist
+node_modules
+*.lock
+package-lock.json
+*.yml
+*error.log

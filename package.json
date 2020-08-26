@@ -1,0 +1,38 @@
+{
+  "name": "themekit-webpack",
+  "version": "1.0.0",
+  "main": "webpack.config.js",
+  "license": "MIT",
+  "keywords": [],
+  "author": "",
+  "private": true,
+  "scripts": {
+    "start": "NODE_ENV=development webpack --watch",
+    "build": "webpack",
+    "deploy": "webpack && shopify-themekit deploy"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.11.4",
+    "@babel/preset-env": "^7.11.0",
+    "@shopify/themekit": "^1.1.4",
+    "autoprefixer": "^9.8.6",
+    "babel-loader": "^8.1.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "browser-sync": "^2.26.12",
+    "clean-webpack-plugin": "^3.0.0",
+    "copy-webpack-plugin": "^5.1.1",
+    "css-loader": "^4.2.1",
+    "file-loader": "^6.0.0",
+    "mini-css-extract-plugin": "^0.10.0",
+    "node-sass": "^4.14.1",
+    "optimize-css-assets-webpack-plugin": "^5.0.3",
+    "postcss-loader": "^3.0.0",
+    "sass-loader": "^9.0.3",
+    "style-loader": "^1.2.1",
+    "terser-webpack-plugin": "^4.1.0",
+    "transform-class-properties": "^0.1.0",
+    "webpack": "^4.44.1",
+    "webpack-bundle-analyzer": "^3.8.0",
+    "webpack-cli": "^3.3.12"
+  }
+}
