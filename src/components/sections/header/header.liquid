@@ -8,9 +8,9 @@
     </div>
 </div>
 <input type='text' name='header' id='headerid' value="test" action="javascript:headerFunction()" />
+{% include 'message' %}
 
-
-<script src="{{ 'bundle.sections.js' | asset_url }}"></script>
+<script src="{{ 'bundle.header.js' | asset_url }}"></script>
 
 {% schema %}
   {

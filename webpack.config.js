@@ -12,11 +12,11 @@ const mode = process.env.NODE_ENV === 'development' ? 'development' : 'productio
 
 module.exports = {
     mode: mode,
-    entry: {
-        'layout': glob.sync('./src/components/layout/**/*.js'),
-        'sections': glob.sync('./src/components/sections/**/*.js'),
-        'snippets': glob.sync('./src/components/snippets/**/*.js'),
-    },
+    entry: glob.sync('./src/components/**/*.js').reduce((acc, path) => {
+        const entry = path.replace(/^.*[\\\/]/, '').replace('.js','');
+        acc[entry] = path;
+        return acc;
+      }, {}),
     output: {
         filename: './assets/bundle.[name].js',
         path: path.resolve(__dirname, 'dist'),
