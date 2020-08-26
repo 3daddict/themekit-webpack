@@ -8,8 +8,8 @@
   <title>{{ page_title }}</title>
   <link rel="canonical" href="{{ canonical_url }}">
   {{ content_for_header }} <!-- Header hook for plugins -->
-  {{ 'bundle.layout.css' | asset_url | stylesheet_tag }}
-  {{ 'bundle.layout.js' | asset_url | script_tag }}
+  {{ 'bundle.theme.css' | asset_url | stylesheet_tag }}
+  {{ 'bundle.theme.js' | asset_url | script_tag }}
 </head>
 <body>
 
