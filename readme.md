@@ -1,7 +1,7 @@
 # Shopify ThemeKit with Webpack 4
 Description
 
-## Goals
+## 🎯 Goals
 - [x] Component based folder structure
 - [x] ES6 Modules
 - [x] Chunk files
@@ -41,3 +41,6 @@ For example a starting template for a `header.liquid` component would look like 
 <!-- Reference to compiled js in assets folder -->
 {{ 'bundle.header.js' | asset_url | script_tag }}
 ```
+
+## 🛣️ Roadmap
+- [ ] Update copy-webpack-plugin to v6 [Issue #519](https://github.com/webpack-contrib/copy-webpack-plugin/issues/519)
