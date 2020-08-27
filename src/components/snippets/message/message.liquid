@@ -1,6 +1,8 @@
+{{ 'bundle.message.css' | asset_url | stylesheet_tag }}
+
 <div class="message_container">
     <h1 class="message_heading">This is a message from a snippet</h1>
     <input type='text' name='message' id='messageid' value="test" action="javascript:messageFunction()" />
 </div>
 
-<script src="{{ 'bundle.message.js' | asset_url }}"></script>
+{{ 'bundle.message.js' | asset_url | script_tag }}
