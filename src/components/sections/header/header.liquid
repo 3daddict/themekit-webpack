@@ -1,3 +1,5 @@
+{{ 'bundle.header.css' | asset_url | stylesheet_tag }}
+
 <div class="header_container">
     <div class="header_block">
         {% for block in section.blocks %}
@@ -10,7 +12,7 @@
 <input type='text' name='header' id='headerid' value="test" action="javascript:headerFunction()" />
 {% include 'message' %}
 
-<script src="{{ 'bundle.header.js' | asset_url }}"></script>
+{{ 'bundle.header.js' | asset_url | script_tag }}
 
 {% schema %}
   {
