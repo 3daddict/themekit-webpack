@@ -1,3 +1,4 @@
-import './theme.scss';
+import "./theme.scss";
 
-console.log("Theme JS Javascript file Loaded!!!")
+const themeFunction = () => 'Theme JS ES6 Function';
+console.log(themeFunction())

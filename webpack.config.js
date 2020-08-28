@@ -2,16 +2,17 @@ const path = require('path');
 const glob = require("glob");
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
+const WebpackShellPluginNext = require('webpack-shell-plugin-next');
 
 const mode = process.env.NODE_ENV === 'development' ? 'development' : 'production';
+const stats = mode === 'development' ? 'errors-warnings' : { children: false };
 
 
 module.exports = {
     mode: mode,
+    stats: stats,
     entry: glob.sync('./src/components/**/*.js').reduce((acc, path) => {
         const entry = path.replace(/^.*[\\\/]/, '').replace('.js','');
         acc[entry] = path;
@@ -20,21 +21,6 @@ module.exports = {
     output: {
         filename: './assets/bundle.[name].js',
         path: path.resolve(__dirname, 'dist'),
-    },
-    optimization: {
-        minimizer: [
-            new TerserPlugin(),
-            new OptimizeCSSAssetsPlugin({})
-        ],
-        splitChunks: {
-            cacheGroups: {
-                commons: {
-                    test: /[\\/]node_modules[\\/]/,
-                    name: 'common',
-                    chunks: 'all'
-                }
-            }
-        }
     },
     plugins: [
         new CleanWebpackPlugin(),
@@ -138,3 +124,30 @@ module.exports = {
         ]
     }
 };
+
+// Run Shell commmands during Webpack operations
+if (mode === 'development') {
+    module.exports.plugins.push(
+      new WebpackShellPluginNext({
+        onBuildStart:{
+          scripts: ['echo -- Webpack build started 🛠'],
+          blocking: true,
+          parallel: false
+        },
+        onBuildError:{
+            scripts: ['echo -- ☠️ Aw snap, Webpack build failed...'],
+        }, 
+        onBuildEnd:{
+          scripts: [
+              'echo -- Webpack build complete ✓',
+              'echo -- Deploying to theme ✈️',
+              'shopify-themekit deploy',
+              'echo -- Deployment competed ✓',
+              'shopify-themekit open',
+              'shopify-themekit watch'],
+          blocking: true,
+          parallel: false
+        }
+      })
+    )
+  }
