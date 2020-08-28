@@ -22,17 +22,6 @@ module.exports = {
         filename: './assets/bundle.[name].js',
         path: path.resolve(__dirname, 'dist'),
     },
-    optimization: {
-        splitChunks: {
-            cacheGroups: {
-                commons: {
-                    test: /[\\/]node_modules[\\/]/,
-                    name: 'common',
-                    chunks: 'all'
-                }
-            }
-        }
-    },
     plugins: [
         new CleanWebpackPlugin(),
         new BundleAnalyzerPlugin({

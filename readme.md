@@ -22,6 +22,7 @@ Example of folder structure:
             - header.js
             - header.liquid
             - header.scss
+
 **Note:** always import component scss files into the component javascript file. For example `import './header.scss';` is inside `header.js`. This ensures the scss will get compiled to css with Webpack.
 There are some rules to follow with this folder structure. For each component liquid file use the following template.
 ```html
