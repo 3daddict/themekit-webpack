@@ -2,16 +2,17 @@ const path = require('path');
 const glob = require("glob");
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
+const WebpackShellPluginNext = require('webpack-shell-plugin-next');
 
 const mode = process.env.NODE_ENV === 'development' ? 'development' : 'production';
+const stats = mode === 'development' ? 'errors-warnings' : { children: false };
 
 
 module.exports = {
     mode: mode,
+    stats: stats,
     entry: glob.sync('./src/components/**/*.js').reduce((acc, path) => {
         const entry = path.replace(/^.*[\\\/]/, '').replace('.js','');
         acc[entry] = path;
@@ -22,10 +23,6 @@ module.exports = {
         path: path.resolve(__dirname, 'dist'),
     },
     optimization: {
-        minimizer: [
-            new TerserPlugin(),
-            new OptimizeCSSAssetsPlugin({})
-        ],
         splitChunks: {
             cacheGroups: {
                 commons: {
@@ -138,3 +135,17 @@ module.exports = {
         ]
     }
 };
+// Run Shell commmands before or after webpack 4 builds
+if (mode === 'development') {
+    module.exports.plugins.push(
+      new WebpackShellPluginNext({
+        onBuildStart:{
+          scripts: ['echo Webpack build in progress...🛠'],
+        }, 
+        onBuildEnd:{
+          scripts: ['echo Build Complete 📦','shopify-themekit watch','shopify-themekit open'],
+          parallel: true
+        }
+      })
+    )
+  }

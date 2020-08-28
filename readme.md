@@ -11,6 +11,7 @@ Description
 - [ ] Prettier Formatting
 - [ ] Asset Image Optimization
 - [ ] Prefetch and Preload
+- [ ] Fonts & Theme Setting
 
 ## 📁 Folder Structure
 This is setup for a component based file structure. All liquid, js and scss are in the same folder to keep things in one place.
