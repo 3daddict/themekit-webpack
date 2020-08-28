@@ -124,16 +124,29 @@ module.exports = {
         ]
     }
 };
-// Run Shell commmands before or after webpack 4 builds
+
+// Run Shell commmands during Webpack operations
 if (mode === 'development') {
     module.exports.plugins.push(
       new WebpackShellPluginNext({
         onBuildStart:{
-          scripts: ['echo Webpack build in progress...🛠'],
+          scripts: ['echo -- Webpack build started 🛠'],
+          blocking: true,
+          parallel: false
+        },
+        onBuildError:{
+            scripts: ['echo -- ☠️ Aw snap, Webpack build failed...'],
         }, 
         onBuildEnd:{
-          scripts: ['echo Build Complete 📦','shopify-themekit watch','shopify-themekit open'],
-          parallel: true
+          scripts: [
+              'echo -- Webpack build complete ✓',
+              'echo -- Deploying to theme ✈️',
+              'shopify-themekit deploy',
+              'echo -- Deployment competed ✓',
+              'shopify-themekit open',
+              'shopify-themekit watch'],
+          blocking: true,
+          parallel: false
         }
       })
     )
