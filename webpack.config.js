@@ -39,14 +39,15 @@ module.exports = {
                     'src/components/**/*.scss',
                     'src/assets/**/*',
                     'src/components/sections/**/*',
-                    'src/components/templates/customers/*',
+                    'src/components/templates/**/*', //! Templates folder was missing.
                     'src/components/snippets/**/*'
                 ]
             },
             {
-                from: 'src/components/templates/customers/*.liquid',
-                to: 'templates/[folder]/[name].[ext]',
-            },
+                from: 'src/components/templates/**/*.liquid',
+                to: 'templates/[name].[ext]', //! Templates folder was missing.
+                flatten: true
+            },            
             {
                 from: 'src/components/sections/**/*.liquid',
                 to: 'sections/[name].[ext]',
@@ -67,8 +68,8 @@ module.exports = {
                 to: 'config/[name].[ext]',
             },
             {
-                from: 'src/locals/*.json',
-                to: 'locals/[name].[ext]',
+                from: 'src/locales/*.json', // !Fixed wrong path.  
+                to: 'locales/[name].[ext]', // !Fixed wrong path. 
             },
         ])
     ],
