@@ -141,6 +141,8 @@ if (mode === 'development') {
         onBuildEnd:{
           scripts: [
               'echo -- Webpack build complete ✓',
+              'echo -- Building TailwindCSS...',
+              'npx tailwindcss build src/components/tailwind.css -o dist/assets/tailwind.css.liquid',
               'echo -- Deploying to theme ✈️',
               'shopify-themekit deploy',
               'echo -- Deployment competed ✓',

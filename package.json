@@ -8,10 +8,11 @@
   "private": true,
   "scripts": {
     "start": "NODE_ENV=development webpack --watch",
-    "build": "webpack",
+    "build": "webpack && npx tailwindcss build src/components/tailwind.css -o dist/assets/tailwind.css.liquid",
     "deploy": "webpack && shopify-themekit deploy"
   },
   "dependencies": {
+    "tailwindcss": "^1.9.6",
     "validator": "^13.1.1"
   },
   "devDependencies": {

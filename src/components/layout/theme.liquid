@@ -8,6 +8,7 @@
   <title>{{ page_title }}</title>
   <link rel="canonical" href="{{ canonical_url }}">
   {{ content_for_header }} <!-- Header hook for plugins -->
+  {{ 'tailwind.css' | asset_url | stylesheet_tag }}
   {{ 'bundle.theme.css' | asset_url | stylesheet_tag }}
   {{ 'bundle.theme.js' | asset_url | script_tag }}
 </head>
@@ -15,7 +16,7 @@
 
   {% section 'header' %}
 
-  <h1 class="flex mx-6 my-2 bg-gray-800">if <span class="text-red-500">red</span> tailwindcss is working</h1>
+  <h1 class="flex mx-6 my-2 text-red-500">if text is red tailwindcss is working</h1>
 
   {% for link in linklists.main-menu.links %}
     {% assign child_list_handle = link.title | handleize %}
