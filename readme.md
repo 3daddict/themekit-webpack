@@ -1,5 +1,7 @@
+![GitHub](https://img.shields.io/github/license/3daddict/themekit-webpack) ![GitHub issues](https://img.shields.io/github/issues/3daddict/themekit-webpack) ![GitHub watchers](https://img.shields.io/github/watchers/3daddict/themekit-webpack) ![GitHub Repo stars](https://img.shields.io/github/stars/3daddict/themekit-webpack) ![GitHub forks](https://img.shields.io/github/forks/3daddict/themekit-webpack)
+
 # Shopify ThemeKit with Webpack 4
-Description
+This is a starter Theme using Webpack, ThemeKit and TailwindCSS for developing Shopify themes with modern build tools. The goal is to create a tool with a component-based folder structure and is easy to use.
 
 ## 🎯 Goals
 - [x] Component based folder structure
@@ -9,12 +11,13 @@ Description
 - [ ] Hot Reloading
 - [ ] Lazy Loading
 - [ ] Prettier Formatting
-- [ ] Asset Image Optimization
+- [ ] Linter
 - [ ] Prefetch and Preload
 - [ ] Fonts & Theme Setting
+- [x] [TailwindCSS](https://tailwindcss.com/)
 
 ## 📁 Folder Structure
-This is setup for a component based file structure. All liquid, js and scss are in the same folder to keep things in one place.
+This is set up for a component-based file structure. All liquid, js and scss are in the same folder to keep things in one place.
 Example of folder structure:
 * components
     * sections
@@ -43,6 +46,19 @@ For example a starting template for a `header.liquid` component would look like 
 <!-- Reference to compiled js in assets folder -->
 {{ 'bundle.header.js' | asset_url | script_tag }}
 ```
+## Node Version Manager
+This theme setup is built with Yarn, Webpack and ThemeKit which are dependant on NodeJS versions.
+You can use up to node `v13` to install dependencies and run build commands.
+- Install [nvm](http://npm.github.io/installation-setup-docs/installing/using-a-node-version-manager.html)
+- Run `nvm install v13` in terminal
+- Install dependencies `yarn install`
+
+## Getting Started
+- Install dependencies `yarn install` or `npm i`
+- Rename the `config.yml.example` to `config.yml` and add the Shopify Theme credentials
+- Run a build test `yarn build` if no errors then you are good to go
 
 ## 🛣️ Roadmap
+- [ ] Finalization and First Release
 - [ ] Update copy-webpack-plugin to v6 [Issue #519](https://github.com/webpack-contrib/copy-webpack-plugin/issues/519)
+- [ ] Webpack 5?

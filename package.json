@@ -4,12 +4,12 @@
   "main": "webpack.config.js",
   "license": "MIT",
   "keywords": [],
-  "author": "",
+  "author": "Mike Salvati",
   "private": true,
   "scripts": {
     "start": "NODE_ENV=development webpack --watch",
     "build": "webpack && npx tailwindcss build src/components/tailwind.css -o dist/assets/tailwind.css.liquid",
-    "deploy": "webpack && shopify-themekit deploy"
+    "deploy": "webpack && npx tailwindcss build src/components/tailwind.css -o dist/assets/tailwind.css.liquid && shopify-themekit deploy"
   },
   "dependencies": {
     "tailwindcss": "^1.9.6",
