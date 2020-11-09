@@ -1,62 +1,23 @@
-{%- comment -%}
-  This is a required section for the Shopify Theme Store.
-  It is available in the "Featured Collection" section in the theme editor.
-
-  Theme Store required settings
-  - Collection
-
-  Theme Store optional settings
-  - Heading: title of the featured collection section
-{%- endcomment -%}
-<section class="featured-collection">
-  {% if section.settings.title != blank %}
-    <h2 class="featured-collection__title">{{ section.settings.title | escape }}</h2>
-  {% endif %}
-
-  {%- assign collection = collections[section.settings.collection] -%}
-
-  {% for product in collection.products limit: 6 %}
-    <a href="{{ product.url | within: collection }}" class="featured-collection-item">
-      {% if product.featured_image != blank %}
-        <div class="featured-collection__image">
-          {% include 'responsive-image' with
-            image: product.featured_image,
-            max_width: 480,
-            max_height: 480
-          %}
+<section class="py-16 bg-gray-300">
+  <div class="container m-auto px-6">
+   <div class="lg:flex justify-between items-center">
+       <div class="lg:w-6/12 lg:p-0 p-7">
+        {%- if section.settings.title != blank -%}
+          <h1 class="text-4xl font-bold leading-tight mb-5 capitalize">{{ section.settings.title | escape }}</h1>
+        {%- endif -%}
+        {%- if section.settings.description != blank -%}
+          <p class="text-xl">{{ section.settings.description | escape }}</p>
+        {%- endif -%}
+          <div class="py-5">
+            <a href="{{ section.settings.button_link }}" class="bg-blue-500 hover:bg-blue-700 text-white featured-collection-button rounded-full py-2 px-5 text-lg  mr-3">{{ section.settings.button }}</a>
+          </div>
         </div>
-      {% endif %}
-
-      <p>{{ product.title | escape }}</p>
-      <span>
-        {% if product.compare_at_price > product.price %}
-          {% if product.price_varies %}
-            {%- assign sale_price = product.price | money -%}
-            {{ 'products.product.on_sale_from_html' | t: price: sale_price }}
-          {% else %}
-            {{ 'products.product.on_sale' | t }}
-            {{ product.price | money }}
-          {% endif %}
-        {% else %}
-          {% if product.price_varies %}
-            {%- assign price = product.price | money -%}
-            {{ 'products.product.from_text_html' | t: price: price }}
-          {% else %}
-            {{ product.price | money }}
-          {% endif %}
-        {% endif %}
-      </span>
-    </a>
-  {% else %}
-    {% for i in (1..6) %}
-      <a href="#" class="featured-collection-item">
-        {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
-        {{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg placeholder-svg--small' }}
-
-        <p>{{ 1999 | money }}</p>
-      </a>
-    {% endfor %}
-  {% endfor %}
+        <div class="lg:w-5/12 order-2">
+          <img src="https://picsum.photos/976/600"
+          style="transform: scale(1) perspective(1040px) rotateY(-11deg) rotateX(2deg) rotate(2deg);" alt="" class="rounded">
+        </div>
+    </div>
+  </div>
 </section>
 
 {% schema %}
@@ -67,7 +28,24 @@
         "type": "text",
         "id": "title",
         "label": "Heading",
-        "default": "Featured collection"
+        "default": "Featured Collection"
+      },
+      {
+        "type": "text",
+        "id": "description",
+        "label": "Description",
+        "default": "There are some cool Tailwind CSS components you can use with this project."
+      },
+      {
+        "type": "text",
+        "id": "button",
+        "label": "CTA Text",
+        "default": "TailwindCSS Components"
+      },
+      {
+        "type": "url",
+        "id": "button_link",
+        "label": "Button URL"
       },
       {
         "id": "collection",
