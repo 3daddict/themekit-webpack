@@ -3,14 +3,13 @@
   <div class="announcement-bar-container text-center p-2">
     {%-  if section.settings.announcement_bar_link != blank -%}
     <a href="{{ section.settings.announcement_bar_link }}">
-      {{ section.settings.announcement_bar_text | escape }}
+      {{ section.settings.announcement_bar_text }}
     </a>
     {%-  else -%}
-    <p>{{ section.settings.announcement_bar_text | escape }}</p>
+    <p>{{ section.settings.announcement_bar_text }}</p>
     {%-  endif -%}
   </div>
   {%-  endif -%}
-
   <nav class="nav-bar-container flex items-center justify-between flex-wrap p-6">
     <div class="flex items-center flex-shrink-0 mr-6">
         {%- if section.settings.logo != blank -%}
@@ -125,7 +124,7 @@
 }
 {% endschema %}
 
-{%- if section.settings.logo != blank -%}
+{%- if section.settings.announcement_bar_enabled -%}
 <style>
   .announcement-bar-container {
     background: {{ section.settings.announcement_bar_bg}};
