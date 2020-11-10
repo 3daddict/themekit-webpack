@@ -1,3 +1,4 @@
+{%- assign collection = collections[section.settings.collection] -%}
 <section class="py-16 bg-gray-300">
   <div class="container m-auto px-6">
    <div class="lg:flex justify-between items-center">
@@ -9,12 +10,21 @@
           <p class="text-xl">{{ section.settings.description | escape }}</p>
         {%- endif -%}
           <div class="py-5">
-            <a href="{{ section.settings.button_link }}" class="bg-blue-500 hover:bg-blue-700 text-white featured-collection-button rounded-full py-2 px-5 text-lg  mr-3">{{ section.settings.button }}</a>
+            {%- if section.settings.button_link and section.settings.button -%}
+              <a href="{{ section.settings.button_link }}" class="bg-blue-500 hover:bg-blue-700 text-white featured-collection-button rounded-full py-2 px-5 text-lg  mr-3">{{ section.settings.button }}</a>
+            {%- elsif section.settings.button -%}
+              <a href="https://tailwindcomponents.com/" target="_blank" class="bg-blue-500 hover:bg-blue-700 text-white featured-collection-button rounded-full py-2 px-5 text-lg  mr-3">TailwindCSS Components</a>
+            {%- endif -%}
           </div>
         </div>
         <div class="lg:w-5/12 order-2">
-          <img src="https://picsum.photos/976/600"
+          {%- if collection.image -%}
+            <img src="{{ collection.image | img_url: '976x' }}"
           style="transform: scale(1) perspective(1040px) rotateY(-11deg) rotateX(2deg) rotate(2deg);" alt="" class="rounded">
+          {%- else -%}
+            <img src="https://picsum.photos/976/600"
+          style="transform: scale(1) perspective(1040px) rotateY(-11deg) rotateX(2deg) rotate(2deg);" alt="" class="rounded">
+          {%- endif -%}
         </div>
     </div>
   </div>

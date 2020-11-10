@@ -1,22 +1,3 @@
-{%- if section.settings.logo != blank -%}
-<style>
-  .announcement-bar-container {
-    background: {{ section.settings.announcement_bar_bg}};
-    color: {{section.settings.announcement_bar_text_color}};
-  }
-
-  .nav-bar-container {
-    background: {{ section.settings.nav_bar_bg}};
-    color: {{section.settings.nav_bar_text_color}};
-  }
-
-  .logo-image {
-    display: block;
-    max-width: {{section.settings.logo_max_width}}px;
-  }
-</style>
-{%- endif -%}
-
 <section data-section-id="{{ section.id }}">
   {%-  if section.settings.announcement_bar_enabled -%}
   <div class="announcement-bar-container text-center p-2">
@@ -143,3 +124,22 @@
   ]
 }
 {% endschema %}
+
+{%- if section.settings.logo != blank -%}
+<style>
+  .announcement-bar-container {
+    background: {{ section.settings.announcement_bar_bg}};
+    color: {{section.settings.announcement_bar_text_color}};
+  }
+
+  .nav-bar-container {
+    background: {{ section.settings.nav_bar_bg}};
+    color: {{section.settings.nav_bar_text_color}};
+  }
+
+  .logo-image {
+    display: block;
+    max-width: {{section.settings.logo_max_width}}px;
+  }
+</style>
+{%- endif -%}

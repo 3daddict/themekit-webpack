@@ -40,7 +40,8 @@ module.exports = {
                     'src/assets/**/*',
                     'src/components/sections/**/*',
                     'src/components/templates/**/*',
-                    'src/components/snippets/**/*'
+                    'src/components/snippets/**/*',
+                    'src/components/tailwind.css'
                 ]
             },
             {
