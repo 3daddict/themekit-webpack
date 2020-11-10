@@ -1,6 +1,34 @@
 {
   "current": "Default",
   "presets": {
-    "Default": { }
+    "Default": {
+      "sections": {
+        "banner-with-text": {
+          "type": "banner-with-text",
+          "blocks": {
+            "banner-with-text-0": {
+              "type": "select"
+            },
+            "banner-with-text-1": {
+              "type": "select"
+            }
+          }
+        },
+        "featured-collection": {
+          "type": "featured-collection",
+          "settings": {
+            "collection": "frontpage"
+          }
+        },
+        "featured-product": {
+          "type": "featured-product"
+        }
+      },
+      "content_for_index": [
+        "banner-with-text",
+        "featured-collection",
+        "featured-product"
+      ]
+    }
   }
 }
