@@ -1,35 +1,144 @@
-{{ 'bundle.header.css' | asset_url | stylesheet_tag }}
-
-<div class="header_container">
-    <div class="header_block">
-        {% for block in section.blocks %}
-            <div class="header_message">
-                <span class="">{{ block.settings.heading | escape }}</span>
-            </div>
-        {% endfor %}
+<section data-section-id="{{ section.id }}">
+  {%-  if section.settings.announcement_bar_enabled -%}
+  <div class="announcement-bar-container text-center p-2">
+    {%-  if section.settings.announcement_bar_link != blank -%}
+    <a href="{{ section.settings.announcement_bar_link }}">
+      {{ section.settings.announcement_bar_text }}
+    </a>
+    {%-  else -%}
+    <p>{{ section.settings.announcement_bar_text }}</p>
+    {%-  endif -%}
+  </div>
+  {%-  endif -%}
+  <nav class="nav-bar-container flex items-center justify-between flex-wrap p-6">
+    <div class="flex items-center flex-shrink-0 mr-6">
+        {%- if section.settings.logo != blank -%}
+            <div>
+              <a href="/">
+                {%- capture image_size -%}{{ section.settings.logo_max_width }}x{%- endcapture -%}
+                <img src="{{ section.settings.logo | img_url: image_size }}"
+                  srcset="{{ section.settings.logo | img_url: image_size }} 1x, {{ section.settings.logo | img_url: image_size, scale: 2 }} 2x"
+                  alt="{{ section.settings.logo.alt | default: shop.name }}">
+              </a>
+        </div>
+        {%- endif -%}
+        <a href="/"><span class="font-semibold text-xl tracking-tight">{{ shop.name }}</span></a>
     </div>
-</div>
-{% include 'message' %}
-
-{{ 'bundle.header.js' | asset_url | script_tag }}
+    <div class="flex-grow flex items-center w-auto">
+      <ul class="text-sm flex-grow">
+        {%- for link in linklists[section.settings.menu].links -%}
+        {%- if link.links != blank -%}
+        <li class="inline-block mt-0 mr-4">
+          <a href="{{ link.url }}">{{ link.title }}{%- include 'icon-arrow-down' -%}</a>
+          <ul class="text-sm flex-grow">
+            {%- for childlink in link.links -%}
+            <li class="inline-block mt-0 mr-4"><a href="{{ childlink.url }}">{{ childlink.title }}</a>
+            </li>
+            {%- endfor -%}
+          </ul>
+        </li>
+        {%- else -%}
+        <li class="inline-block mt-0 mr-4"><a href="{{ link.url }}">{{ link.title }}</a></li>
+        {%- endif -%}
+        {%- endfor -%}
+      </ul>
+    </div>
+  </nav>
+</section>
 
 {% schema %}
-  {
-    "name": "Header",
-	"max_blocks": 3,
-    "settings": [],
-	"blocks": [
-	  {
-		"type": "message",
-		"name": "Store message",
-		"settings": [
-          {
-            "type": "text",
-            "id": "heading",
-            "label": "Heading"
-          }
-		]
-	  }
-	]
-  }
+{
+  "name": "Header",
+  "settings": [{
+          "type": "header",
+          "content": "Announcement Bar"
+      },
+      {
+          "type": "checkbox",
+          "id": "announcement_bar_enabled",
+          "label": "Show Announcement",
+          "default": true
+      },
+      {
+          "type": "text",
+          "id": "announcement_bar_text",
+          "label": "Announcement Text",
+          "default": "Webpack is awesome!"
+      },
+      {
+          "type": "color",
+          "id": "announcement_bar_bg",
+          "label": "Background Color",
+          "default": "#000000"
+      },
+      {
+          "type": "color",
+          "id": "announcement_bar_text_color",
+          "label": "Annoucement Text Color",
+          "default": "#FFFFFF"
+      },
+      {
+          "type": "url",
+          "id": "announcement_bar_link",
+          "label": "Announcement Link",
+          "info": "Optional"
+      },
+      {
+          "type": "header",
+          "content": "Navbar"
+      },
+      {
+          "type": "color",
+          "id": "nav_bar_bg",
+          "label": "Navbar Background Color",
+          "default": "#FFFFFF"
+      },
+      {
+          "type": "color",
+          "id": "nav_bar_text_color",
+          "label": "Navbar Text Color",
+          "default": "#000000"
+      },
+      {
+          "type": "image_picker",
+          "id": "logo",
+          "label": "Logo Image"
+      },
+      {
+          "type": "range",
+          "id": "logo_max_width",
+          "min": 20,
+          "max": 420,
+          "step": 10,
+          "unit": "px",
+          "label": "Logo Width",
+          "default": 60
+      },
+      {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Menu",
+          "default": "main-menu"
+      }
+  ]
+}
 {% endschema %}
+
+{%- if section.settings.announcement_bar_enabled -%}
+<style>
+  .announcement-bar-container {
+    background: {{ section.settings.announcement_bar_bg}};
+    color: {{section.settings.announcement_bar_text_color}};
+  }
+
+  .nav-bar-container {
+    background: {{ section.settings.nav_bar_bg}};
+    color: {{section.settings.nav_bar_text_color}};
+  }
+
+  .logo-image {
+    display: block;
+    max-width: {{section.settings.logo_max_width}}px;
+  }
+</style>
+{%- endif -%}

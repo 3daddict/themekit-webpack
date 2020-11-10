@@ -1,0 +1,93 @@
+<section class="banner_image relative flex flex-col" data-section-id="{{ section.id }}">
+    {%- if section.settings.image != blank -%}
+    <picture class="ratio-16/9 object-cover w-full">
+      <source media="(max-width: 375px)" srcset="{{ section.settings.image | img_url: '375x' }}, {{ section.settings.image | img_url: '375x', scale: 2 }} 2x">
+      <source media="(max-width: 768px)" srcset="{{ section.settings.image | img_url: '768x' }}, {{ section.settings.image | img_url: '768x', scale: 2 }} 2x">
+      <img class="w-full" src="{{ section.settings.image | img_url: '1200x' }}"
+        srcset="{{ section.settings.image | img_url: '1200x' }}, {{ section.settings.image | img_url: '1200x', scale: 2 }} 2x"
+        alt="{%- if section.settings.image.alt != blank -%}{{ section.settings.image.alt | escape }}{%- else -%}{{ section.settings.title | escape }}{%- endif -%}"
+        loading="lazy">
+    </picture>
+    {%- else -%}
+      <img src="https://picsum.photos/1200/600" alt="placeholder image">
+    {%- endif -%}
+    {%- if section.settings.overlay -%}
+      <div class="absolute bg-black opacity-50 top-0 right-0 bottom-0 left-0"></div>
+    {%- endif -%}
+    <div class="banner_title text-white p-8 absolute inset-0 flex flex-col items-center justify-center text-center">
+      <h1 class="text-2xl sm:text-6xl">{{ section.settings.title }}</h1>
+      <p class="text-base sm:text-4xl">{{ section.settings.text }}</p>
+      {%- if section.blocks -%}
+        <div class="flex flex-row flex-wrap justify-center mt-8">
+          {%- for block in section.blocks -%}
+          <a href="{{ block.settings.link }}">
+            <button class="bg-blue-500 hover:bg-blue-700 py-2 px-4 mx-2 rounded">{{ block.settings.text }}</button>
+          </a>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+</section>
+
+{% schema %}
+  {
+    "name": "Banner with Text",
+    "max_blocks": 2,
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Banner Image"
+      },
+      {
+        "type": "checkbox",
+        "id": "overlay",
+        "label": "Image Overlay",
+        "info": "Darken Image with Black Overlay",
+        "default": true
+      },
+      {
+        "type": "url",
+        "id": "banner_link",
+        "label": "Banner Link"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Banner Heading",
+        "default": "ThemeKit with Webpack"
+      },
+      {
+        "type": "textarea",
+        "id": "text",
+        "label": "Banner Body",
+        "default": "A modern Shopify Theme with Webpack and TailwindCSS"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "select",
+        "name": "CTA Button",
+        "settings": [
+          {
+            "label": "Button Text",
+            "id": "text",
+            "type": "text",
+            "default": "CTA Button"
+          },
+          {
+            "label": "Button Link",
+            "id": "link",
+            "type": "url"
+          }
+        ]
+      }
+    ],
+	"presets": [
+      {
+        "name": "Banner with Text",
+        "category": "Image"
+      }
+    ]
+  }
+{% endschema %}

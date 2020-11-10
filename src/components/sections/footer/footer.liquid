@@ -1,0 +1,139 @@
+<footer class="footer relative pt-1 border-b-2">
+  <div class="container mx-auto px-6">
+    <div class="sm:flex sm:mt-8">
+      <div class="mt-8 sm:mt-0 sm:w-full sm:px-8 flex flex-col md:flex-row justify-between">
+        <div class="flex flex-col">
+          {%- if section.settings.first_menu_enable -%}
+          <span class="font-bold text-gray-700 uppercase mb-2">{{ section.settings.first_title }}</span>
+          {%- if linklists[footer_linklist].links.size > 0 -%}
+          {%- assign first_linklist = section.settings.first_linklist -%}
+          {%- for link in linklists[footer_linklist].links -%}
+          <span class="my-2">
+            <a href="{{ link.url }}" class=" text-md">{{ link.title }}</a>
+          </span>
+          {%- endfor -%}
+          {%- else -%}
+          <span class="my-2"><a href="#" class=" text-md">link 1</a></span>
+          <span class="my-2"><a href="#" class=" text-md">link 1</a></span>
+          <span class="my-2"><a href="#" class=" text-md">link 1</a></span>
+          {%- endif -%}
+          {%- endif -%}
+        </div>
+        <div class="flex flex-col">
+          {%- if section.settings.second_menu_enable -%}
+          <span class="font-bold text-gray-700 uppercase mb-2">{{ section.settings.second_title }}</span>
+          {%- if linklists[footer_linklist].links.size > 0 -%}
+          {%- assign second_linklist = section.settings.second_linklist -%}
+          {%- for link in linklists[footer_linklist].links -%}
+          <span class="my-2">
+            <a href="{{ link.url }}" class=" text-md">{{ link.title }}</a>
+          </span>
+          {%- endfor -%}
+          {%- else -%}
+          <span class="my-2"><a href="#" class=" text-md">link 1</a></span>
+          <span class="my-2"><a href="#" class=" text-md">link 1</a></span>
+          <span class="my-2"><a href="#" class=" text-md">link 1</a></span>
+          {%- endif -%}
+          {%- endif -%}
+        </div>
+        <div class="flex flex-col">
+          {%- if section.settings.third_menu_enable -%}
+          <span class="font-bold text-gray-700 uppercase mb-2">{{ section.settings.third_title }}</span>
+          {%- if linklists[footer_linklist].links.size > 0 -%}
+          {%- assign third_linklist = section.settings.third_linklist -%}
+          {%- for link in linklists[footer_linklist].links -%}
+          <span class="my-2">
+            <a href="{{ link.url }}" class=" text-md">{{ link.title }}</a>
+          </span>
+          {%- endfor -%}
+          {%- else -%}
+          <span class="my-2"><a href="#" class=" text-md">link 1</a></span>
+          <span class="my-2"><a href="#" class=" text-md">link 1</a></span>
+          <span class="my-2"><a href="#" class=" text-md">link 1</a></span>
+          {%- endif -%}
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container mx-auto px-6">
+    <div class="mt-16 border-t-2 border-gray-300 flex flex-col items-center">
+      <div class="sm:w-2/3 text-center py-6">
+        <p class="text-sm font-bold mb-2">
+          <small>&copy; {{ 'now' | date: "%Y" }}, {{ shop.name | link_to: '/' }}. {{ powered_by_link }}</small>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+  {
+    "name": "Footer",
+    "settings": [
+      {
+        "type": "header",
+        "content": "First Menu"
+      },
+      {
+        "type": "checkbox",
+        "id": "first_menu_enable",
+        "label": "Enable Menu",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "first_title",
+        "label": "Menu Title",
+        "default": "Menu 1"
+      },
+      {
+        "type": "link_list",
+        "id": "first_linklist",
+        "label": "First menu"
+      },
+      {
+        "type": "header",
+        "content": "Second Menu"
+      },
+      {
+        "type": "checkbox",
+        "id": "second_menu_enable",
+        "label": "Enable Menu",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "second_title",
+        "label": "Menu Title",
+        "default": "Menu 2"
+      },
+      {
+        "type": "link_list",
+        "id": "second_linklist",
+        "label": "Second menu"
+      },
+      {
+        "type": "header",
+        "content": "Third Menu"
+      },
+      {
+        "type": "checkbox",
+        "id": "third_menu_enable",
+        "label": "Enable Menu",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "third_title",
+        "label": "Menu Title",
+        "default": "Menu 3"
+      },
+      {
+        "type": "link_list",
+        "id": "third_linklist",
+        "label": "Third menu"
+      }
+    ]
+  }
+{% endschema %}

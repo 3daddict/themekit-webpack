@@ -1,0 +1,73 @@
+{%- assign collection = collections[section.settings.collection] -%}
+<section class="py-16 bg-gray-300">
+  <div class="container m-auto px-6">
+   <div class="lg:flex justify-between items-center">
+       <div class="lg:w-6/12 lg:p-0 p-7">
+        {%- if section.settings.title != blank -%}
+          <h1 class="text-4xl font-bold leading-tight mb-5 capitalize">{{ section.settings.title | escape }}</h1>
+        {%- endif -%}
+        {%- if section.settings.description != blank -%}
+          <p class="text-xl">{{ section.settings.description | escape }}</p>
+        {%- endif -%}
+          <div class="py-5">
+            {%- if section.settings.button_link and section.settings.button -%}
+              <a href="{{ section.settings.button_link }}" class="bg-blue-500 hover:bg-blue-700 text-white featured-collection-button rounded-full py-2 px-5 text-lg  mr-3">{{ section.settings.button }}</a>
+            {%- elsif section.settings.button -%}
+              <a href="https://tailwindcomponents.com/" target="_blank" class="bg-blue-500 hover:bg-blue-700 text-white featured-collection-button rounded-full py-2 px-5 text-lg  mr-3">TailwindCSS Components</a>
+            {%- endif -%}
+          </div>
+        </div>
+        <div class="lg:w-5/12 order-2">
+          {%- if collection.image -%}
+            <img src="{{ collection.image | img_url: '976x' }}"
+          style="transform: scale(1) perspective(1040px) rotateY(-11deg) rotateX(2deg) rotate(2deg);" alt="" class="rounded">
+          {%- else -%}
+            <img src="https://picsum.photos/976/600"
+          style="transform: scale(1) perspective(1040px) rotateY(-11deg) rotateX(2deg) rotate(2deg);" alt="" class="rounded">
+          {%- endif -%}
+        </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "Featured collection",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Featured Collection"
+      },
+      {
+        "type": "text",
+        "id": "description",
+        "label": "Description",
+        "default": "There are some cool Tailwind CSS components you can use with this project."
+      },
+      {
+        "type": "text",
+        "id": "button",
+        "label": "CTA Text",
+        "default": "TailwindCSS Components"
+      },
+      {
+        "type": "url",
+        "id": "button_link",
+        "label": "Button URL"
+      },
+      {
+        "id": "collection",
+        "type": "collection",
+        "label": "Collection"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Featured collection",
+        "category": "Collection"
+      }
+    ]
+  }
+{% endschema %}
