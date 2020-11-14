@@ -10,7 +10,7 @@ This is a starter Theme using Webpack, ThemeKit and TailwindCSS for developing S
 - [x] Optimized and Minified code
 - [ ] Hot Reloading
 - [ ] Lazy Loading
-- [ ] Prettier Formatting
+- [x] Prettier Formatting
 - [ ] Linter
 - [ ] Prefetch and Preload
 - [ ] Fonts & Theme Setting
@@ -48,9 +48,9 @@ For example a starting template for a `header.liquid` component would look like 
 ```
 ## Node Version Manager
 This theme setup is built with Yarn, Webpack and ThemeKit which are dependant on NodeJS versions.
-You can use up to node `v13` to install dependencies and run build commands.
+You can use node `v14` to install dependencies and run build commands.
 - Install [nvm](http://npm.github.io/installation-setup-docs/installing/using-a-node-version-manager.html)
-- Run `nvm install v13` in terminal
+- Run `nvm install v14` in terminal
 - Install dependencies `yarn install`
 
 ## Getting Started
@@ -58,7 +58,20 @@ You can use up to node `v13` to install dependencies and run build commands.
 - Rename the `config.yml.example` to `config.yml` and add the Shopify Theme credentials
 - Run a build test `yarn build` if no errors then you are good to go
 
+## Whitespace control
+In [Liquid](https://shopify.github.io/liquid/basics/whitespace/), you can include a hyphen in your tag syntax `{{-`, `-}}`, `{%-`, and `-%}` to strip whitespace from the left or right side of a rendered tag.
+By including hyphens in your `assign` tag, you can strip the generated whitespace from the rendered template.
+If you don’t want any of your tags to print whitespace, as a general rule you can add hyphens to both sides of all your tags (`{%-` and `-%}`):
+```html
+{%- assign username = "Borat Margaret Sagdiyev" -%}
+{%- if username and username.size > 10 -%}
+  Wow, {{ username }}, I like!
+{%- else -%}
+  Hello there!
+{%- endif -%}
+```
+
 ## 🛣️ Roadmap
 - [ ] Finalization and First Release
-- [ ] Update copy-webpack-plugin to v6 [Issue #519](https://github.com/webpack-contrib/copy-webpack-plugin/issues/519)
-- [ ] Webpack 5?
+- [x] Update copy-webpack-plugin to v6 [Issue #519](https://github.com/webpack-contrib/copy-webpack-plugin/issues/519) Thanks [@felixmosh](https://github.com/felixmosh)!
+- [ ] Webpack 5? 🤔

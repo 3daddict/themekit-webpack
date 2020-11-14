@@ -6,6 +6,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const WebpackShellPluginNext = require('webpack-shell-plugin-next');
 
+
 const isDevMode = argv.mode === 'development';
 const stats = isDevMode ? 'errors-warnings' : { children: false };
 const port = 9000;
@@ -93,7 +94,6 @@ module.exports = {
                     parallel: false,
                 },
             }),
-
         new MiniCssExtractPlugin({
             filename: './assets/bundle.[name].css',
         }),
