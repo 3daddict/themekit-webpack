@@ -1,4 +1,5 @@
 <section data-section-id="{{ section.id }}">
+  {% include "message" %}
   {%-  if section.settings.announcement_bar_enabled -%}
   <div class="announcement-bar-container text-center p-2">
     {%-  if section.settings.announcement_bar_link != blank -%}
