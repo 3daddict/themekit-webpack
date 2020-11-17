@@ -75,9 +75,7 @@ If you don’t want any of your tags to print whitespace, as a general rule you 
 When in development mode `yarn start` hot module reloading is enabled. It watched for changes to `JavaScript`, `CSS` and `Liquid` files. When JS or CSS is changes the browser will change without the need to refresh. When changes are made to liquid files a manual browser reload is required.
 
 ## Self-Signed Certificate
-In the event that you find the HMR assets are not loading and the requests to localhost:9000 are 404 you will need to approve or pass a valid certificate.
-![image](https://user-images.githubusercontent.com/29803478/99157400-46787900-267d-11eb-96be-4796dbd01ef9.png)
-To solve this issue you can open a new browser window and approve the SSL Certificate or pass a valid certificate as mentioned here [devServer.https](https://webpack.js.org/configuration/dev-server/#devserverhttps).
+In the event that you find the HMR assets are not loading and the requests to localhost:9000 are 404 you will need to approve or pass a valid certificate.<br>![image](https://user-images.githubusercontent.com/29803478/99157400-46787900-267d-11eb-96be-4796dbd01ef9.png)<br>To solve this issue you can open a new browser window and approve the SSL Certificate or pass a valid certificate as mentioned here [devServer.https](https://webpack.js.org/configuration/dev-server/#devserverhttps).
 
 ## 🛣️ Roadmap
 - [ ] Finalization and First Release
