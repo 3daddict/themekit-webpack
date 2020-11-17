@@ -7,9 +7,9 @@
   "author": "Mike Salvati",
   "private": true,
   "scripts": {
-    "start": "webpack --mode=development --watch",
+    "start": "webpack serve --mode=development",
     "build": "webpack --mode=production && npx tailwindcss build src/components/tailwind.css -o dist/assets/tailwind.css.liquid",
-    "deploy": "webpack --mode=production && npx tailwindcss build src/components/tailwind.css -o dist/assets/tailwind.css.liquid && shopify-themekit deploy"
+    "deploy": "webpack --mode=production && npx tailwindcss build src/components/tailwind.css -o dist/assets/tailwind.css.liquid && shopify-themekit deploy --env=production"
   },
   "dependencies": {
     "tailwindcss": "^1.9.6",
