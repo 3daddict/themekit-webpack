@@ -57,6 +57,10 @@ module.exports = {
                 ],
             },
             {
+                test: /\.liquid$/,
+                use: ['string-loader'],
+            },
+            {
                 test: /\.(sc|sa|c)ss$/,
                 use: [
                     isDevMode ? 'style-loader' : MiniCssExtractPlugin.loader,
