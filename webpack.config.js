@@ -15,21 +15,31 @@ const publicPath = isDevMode ? `https://localhost:${port}/` : '';
 
 module.exports = {
     stats: stats,
-    entry: glob.sync('./src/components/**/*.js').reduce((acc, path) => {
-        const entry = path.replace(/^.*[\\\/]/, '').replace('.js', '');
-        acc[entry] = path;
-        return acc;
-    }, {}),
+    entry: glob.sync('./src/components/**/*.js').reduce(
+        (acc, path) => {
+            const entry = path.replace(/^.*[\\\/]/, '').replace('.js', '');
+            acc[entry] = path;
+            return acc;
+        },
+        { liquidDevEntry: './liquidDevEntry.js' }
+    ),
     output: {
-        filename: './assets/bundle.[name].js',
-        hotUpdateChunkFilename: './hot/[id].[fullhash].hot-update.js',
-        hotUpdateMainFilename: './hot/[fullhash].hot-update.json',
+        filename: 'assets/bundle.[name].js',
+        hotUpdateChunkFilename: 'hot/[id].[fullhash].hot-update.js',
+        hotUpdateMainFilename: 'hot/[fullhash].hot-update.json',
         path: path.resolve(__dirname, 'dist'),
         publicPath,
     },
     cache: false,
+    optimization: {
+        runtimeChunk: { name: 'runtime' },
+    },
     module: {
         rules: [
+            {
+                test: /\.liquid$/,
+                use: ['string-loader'],
+            },
             {
                 test: /\.(sc|sa|c)ss$/,
                 use: [
@@ -117,7 +127,10 @@ module.exports = {
                         return path.join(targetFolder, path.basename(absolutePath));
                     },
                     transform: isDevMode
-                        ? function (content) {
+                        ? function (content, absolutePath) {
+                              const relativePath = path.join(__dirname, 'src');
+                              const diff = path.relative(relativePath, absolutePath);
+
                               content = content
                                   .toString()
                                   .replace(
@@ -134,7 +147,7 @@ module.exports = {
                                       }
                                   );
 
-                              return content;
+                              return `<!-- hmr-start: ./${diff} -->${content}<!-- hmr-end: ./${diff} -->`;
                           }
                         : undefined,
                 },
@@ -167,7 +180,6 @@ module.exports = {
         https: true,
         disableHostCheck: true,
         hot: true,
-        liveReload: false,
         overlay: true,
         writeToDisk: true,
     },
