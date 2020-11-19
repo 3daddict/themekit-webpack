@@ -55,7 +55,13 @@ module.exports = {
             },
             {
                 test: /\.liquid$/,
-                use: ['string-loader'],
+                use: [
+                    'string-loader',
+                    {
+                        loader: path.resolve(__dirname, 'liquidDev.loader.js'),
+                        options: { publicPath },
+                    },
+                ],
             },
             {
                 test: /\.(sc|sa|c)ss$/,
