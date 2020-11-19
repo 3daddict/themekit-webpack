@@ -20,7 +20,7 @@ module.exports = {
             acc[entry] = path;
             return acc;
         },
-        { liquidDevEntry: './liquidDevEntry.js' }
+        { liquidDev: './liquidDev.entry.js' }
     ),
     output: {
         filename: 'assets/bundle.[name].js',
@@ -35,9 +35,15 @@ module.exports = {
     },
     module: {
         rules: [
-            {
+            isDevMode && {
                 test: /\.liquid$/,
-                use: ['string-loader'],
+                use: [
+                    'string-loader',
+                    {
+                        loader: path.resolve(__dirname, 'liquidDev.loader.js'),
+                        options: { publicPath },
+                    },
+                ],
             },
             {
                 test: /\.(sc|sa|c)ss$/,
@@ -71,7 +77,7 @@ module.exports = {
                 exclude: /node_modules/,
                 loader: 'babel-loader',
             },
-        ],
+        ].filter(Boolean),
     },
     plugins: [
         new CleanWebpackPlugin({
