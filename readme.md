@@ -54,7 +54,7 @@ You can use node `v14` to install dependencies and run build commands.
 - Install dependencies `yarn install`
 
 ## Clean-CSS CLI
-This project uses (clean-css-cli)[https://www.npmjs.com/package/clean-css-cli] to minify TailwindCSS during build.
+This project uses [clean-css-cli](https://www.npmjs.com/package/clean-css-cli) to minify TailwindCSS during build.
 
 Install Clean-CSS CLI
 `yarn add clean-css-cli -g`
