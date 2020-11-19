@@ -120,7 +120,7 @@ module.exports = {
                                       function (matched, fileName, type) {
                                           if (type === 'stylesheet_tag') {
                                               if (fileName !== 'tailwind.min.css') {
-                                                  return '';c
+                                                  return '';
                                               }
                                               return matched;
                                           }
