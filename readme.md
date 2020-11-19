@@ -1,4 +1,4 @@
-![GitHub](https://img.shields.io/github/license/3daddict/themekit-webpack) ![GitHub issues](https://img.shields.io/github/issues/3daddict/themekit-webpack) ![GitHub watchers](https://img.shields.io/github/watchers/3daddict/themekit-webpack) ![GitHub Repo stars](https://img.shields.io/github/stars/3daddict/themekit-webpack) ![GitHub forks](https://img.shields.io/github/forks/3daddict/themekit-webpack)
+![GitHub](https://img.shields.io/github/license/3daddict/themekit-webpack) ![GitHub issues](https://img.shields.io/github/issues/3daddict/themekit-webpack) ![GitHub watchers](https://img.shields.io/github/watchers/3daddict/themekit-webpack) ![GitHub Repo stars](https://img.shields.io/github/stars/3daddict/themekit-webpack) ![GitHub forks](https://img.shields.io/github/forks/3daddict/themekit-webpack) [![Github all releases](https://img.shields.io/github/downloads/3daddict/themekit-webpack/total.svg)](https://GitHub.com/3daddict/themekit-webpack/releases/)
 
 # Shopify ThemeKit with Webpack 4
 This is a starter Theme using Webpack, ThemeKit and TailwindCSS for developing Shopify themes with modern build tools. The goal is to create a tool with a component-based folder structure and is easy to use.
@@ -53,10 +53,24 @@ You can use node `v14` to install dependencies and run build commands.
 - Run `nvm install v14` in terminal
 - Install dependencies `yarn install`
 
+## Clean-CSS CLI
+This project uses [clean-css-cli](https://www.npmjs.com/package/clean-css-cli) to minify TailwindCSS during build.
+
+Install Clean-CSS CLI  
+`yarn add clean-css-cli -g`  
+**Note:** Global install via -g option is recommended unless you want to execute the binary via a relative path, i.e. ./node_modules/.bin/cleancss
+
 ## Getting Started
 - Install dependencies `yarn install` or `npm i`
 - Rename the `config.yml.example` to `config.yml` and add the Shopify Theme credentials
-- Run a build test `yarn build` if no errors then you are good to go
+- Run a build test `yarn build` if no errors then you are good to go  
+  
+**Note:** the first time you run `yarn start` or `yarn deploy` to a new theme you must comment out `ignore_files`.
+```
+# - config/settings_data.json
+# - "*.js"
+# - "*.hot-update.json"
+```
 
 ## Whitespace control
 In [Liquid](https://shopify.github.io/liquid/basics/whitespace/), you can include a hyphen in your tag syntax `{{-`, `-}}`, `{%-`, and `-%}` to strip whitespace from the left or right side of a rendered tag.
