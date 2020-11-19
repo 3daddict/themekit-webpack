@@ -8,8 +8,8 @@
   "private": true,
   "scripts": {
     "start": "webpack serve --mode=development",
-    "build": "webpack --mode=production && npx tailwindcss build src/components/tailwind.css -o dist/assets/tailwind.css.liquid",
-    "deploy": "webpack --mode=production && npx tailwindcss build src/components/tailwind.css -o dist/assets/tailwind.css.liquid && shopify-themekit deploy --env=production"
+    "build": "webpack --mode=production && npx tailwindcss build src/components/tailwind.css -o dist/assets/tailwind.css.liquid && cleancss -o dist/assets/tailwind.min.css.liquid dist/assets/tailwind.css.liquid",
+    "deploy": "webpack --mode=production && npx tailwindcss build src/components/tailwind.css -o dist/assets/tailwind.css.liquid && cleancss -o dist/assets/tailwind.min.css.liquid dist/assets/tailwind.css.liquid && shopify-themekit deploy --env=production"
   },
   "dependencies": {
     "tailwindcss": "^1.9.6",
@@ -19,10 +19,11 @@
     "@babel/core": "^7.11.4",
     "@babel/preset-env": "^7.11.0",
     "@shopify/themekit": "^1.1.6",
-    "autoprefixer": "^10.0.2",
+    "autoprefixer": "^9.8.6",
     "babel-loader": "^8.1.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "browser-sync": "^2.26.12",
+    "clean-css-cli": "^4.3.0",
     "clean-webpack-plugin": "^3.0.0",
     "copy-webpack-plugin": "^6.3.0",
     "css-loader": "^5.0.1",

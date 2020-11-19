@@ -29,7 +29,7 @@
   <title>{{ seo_title | strip }}</title>
 
   {{ content_for_header }} <!-- Header hook for plugins -->
-  {{ 'tailwind.css' | asset_url | stylesheet_tag }}
+  {{ 'tailwind.min.css' | asset_url | stylesheet_tag }}
   {{ 'bundle.theme.css' | asset_url | stylesheet_tag }}
   {{ 'bundle.theme.js' | asset_url | script_tag }}
 </head>

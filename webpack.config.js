@@ -85,6 +85,8 @@ module.exports = {
                         'echo -- Webpack build complete ✓',
                         'echo -- Building TailwindCSS...',
                         'npx tailwindcss build src/components/tailwind.css -o dist/assets/tailwind.css.liquid',
+                        'echo -- Minifying TailwindCSS',
+                        'cleancss -o dist/assets/tailwind.min.css.liquid dist/assets/tailwind.css.liquid',
                         'echo -- Deploying to theme ✈️',
                         'shopify-themekit deploy --env=development',
                         'echo -- Deployment competed ✓',
@@ -117,7 +119,7 @@ module.exports = {
                                       /{{\s*'([^']+)'\s*\|\s*asset_url\s*\|\s*(stylesheet_tag|script_tag)\s*}}/g,
                                       function (matched, fileName, type) {
                                           if (type === 'stylesheet_tag') {
-                                              if (fileName !== 'tailwind.css') {
+                                              if (fileName !== 'tailwind.min.css') {
                                                   return '';
                                               }
                                               return matched;

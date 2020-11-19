@@ -53,10 +53,23 @@ You can use node `v14` to install dependencies and run build commands.
 - Run `nvm install v14` in terminal
 - Install dependencies `yarn install`
 
+## Clean-CSS CLI
+This project uses [clean-css-cli](https://www.npmjs.com/package/clean-css-cli) to minify TailwindCSS during build.
+
+Install Clean-CSS CLI
+`yarn add clean-css-cli -g`
+**Note:** Global install via -g option is recommended unless you want to execute the binary via a relative path, i.e. ./node_modules/.bin/cleancss
+
 ## Getting Started
 - Install dependencies `yarn install` or `npm i`
 - Rename the `config.yml.example` to `config.yml` and add the Shopify Theme credentials
 - Run a build test `yarn build` if no errors then you are good to go
+**Note:** the first time you run `yarn start` or `yarn deploy` to a new theme you must comment out `ignore_files`.
+```
+# - config/settings_data.json
+# - "*.js"
+# - "*.hot-update.json"
+```
 
 ## Whitespace control
 In [Liquid](https://shopify.github.io/liquid/basics/whitespace/), you can include a hyphen in your tag syntax `{{-`, `-}}`, `{%-`, and `-%}` to strip whitespace from the left or right side of a rendered tag.
@@ -75,9 +88,7 @@ If you don’t want any of your tags to print whitespace, as a general rule you 
 When in development mode `yarn start` hot module reloading is enabled. It watched for changes to `JavaScript`, `CSS` and `Liquid` files. When JS or CSS is changes the browser will change without the need to refresh. When changes are made to liquid files a manual browser reload is required.
 
 ## Self-Signed Certificate
-In the event that you find the HMR assets are not loading and the requests to localhost:9000 are 404 you will need to approve or pass a valid certificate.
-![image](https://user-images.githubusercontent.com/29803478/99157400-46787900-267d-11eb-96be-4796dbd01ef9.png)
-To solve this issue you can open a new browser window and approve the SSL Certificate or pass a valid certificate as mentioned here [devServer.https](https://webpack.js.org/configuration/dev-server/#devserverhttps).
+In the event that you find the HMR assets are not loading and the requests to localhost:9000 are 404 you will need to approve or pass a valid certificate.<br>![image](https://user-images.githubusercontent.com/29803478/99157400-46787900-267d-11eb-96be-4796dbd01ef9.png)<br>To solve this issue you can open a new browser window and approve the SSL Certificate or pass a valid certificate as mentioned here [devServer.https](https://webpack.js.org/configuration/dev-server/#devserverhttps).
 
 ## 🛣️ Roadmap
 - [ ] Finalization and First Release
