@@ -6,6 +6,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const WebpackShellPluginNext = require('webpack-shell-plugin-next');
 
+
 const isDevMode = argv.mode === 'development';
 const stats = isDevMode ? 'errors-warnings' : { children: false };
 const port = 9000;
@@ -19,7 +20,7 @@ module.exports = {
             acc[entry] = path;
             return acc;
         },
-        { liquidDevEntry: './liquidDevEntry.js' }
+        { liquidDev: './liquidDev.entry.js' }
     ),
     output: {
         filename: 'assets/bundle.[name].js',
@@ -34,9 +35,15 @@ module.exports = {
     },
     module: {
         rules: [
-            {
+            isDevMode && {
                 test: /\.liquid$/,
-                use: ['string-loader'],
+                use: [
+                    'string-loader',
+                    {
+                        loader: path.resolve(__dirname, 'liquidDev.loader.js'),
+                        options: { publicPath },
+                    },
+                ],
             },
             {
                 test: /\.(sc|sa|c)ss$/,
@@ -70,7 +77,7 @@ module.exports = {
                 exclude: /node_modules/,
                 loader: 'babel-loader',
             },
-        ],
+        ].filter(Boolean),
     },
     plugins: [
         new CleanWebpackPlugin({
@@ -94,6 +101,8 @@ module.exports = {
                         'echo -- Webpack build complete ✓',
                         'echo -- Building TailwindCSS...',
                         'npx tailwindcss build src/components/tailwind.css -o dist/assets/tailwind.css.liquid',
+                        'echo -- Minifying TailwindCSS',
+                        'cleancss -o dist/assets/tailwind.min.css.liquid dist/assets/tailwind.css.liquid',
                         'echo -- Deploying to theme ✈️',
                         'shopify-themekit deploy --env=development',
                         'echo -- Deployment competed ✓',
@@ -103,7 +112,6 @@ module.exports = {
                     parallel: false,
                 },
             }),
-
         new MiniCssExtractPlugin({
             filename: './assets/bundle.[name].css',
         }),
@@ -130,7 +138,7 @@ module.exports = {
                                       /{{\s*'([^']+)'\s*\|\s*asset_url\s*\|\s*(stylesheet_tag|script_tag)\s*}}/g,
                                       function (matched, fileName, type) {
                                           if (type === 'stylesheet_tag') {
-                                              if (fileName !== 'tailwind.css') {
+                                              if (fileName !== 'tailwind.min.css') {
                                                   return '';
                                               }
                                               return matched;
