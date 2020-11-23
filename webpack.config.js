@@ -6,6 +6,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const WebpackShellPluginNext = require('webpack-shell-plugin-next');
 const ESLintPlugin = require('eslint-webpack-plugin');
+const { transformLiquid } = require('./shopify-dev-utils/transformLiquid');
 
 
 const isDevMode = argv.mode === 'development';
@@ -21,7 +22,7 @@ module.exports = {
             acc[entry] = path;
             return acc;
         },
-        { liquidDev: './liquidDev.entry.js' }
+        { liquidDev: './shopify-dev-utils/liquidDev.entry.js' }
     ),
     output: {
         filename: 'assets/bundle.[name].js',
@@ -41,8 +42,15 @@ module.exports = {
                 use: [
                     'string-loader',
                     {
-                        loader: path.resolve(__dirname, 'liquidDev.loader.js'),
-                        options: { publicPath },
+                        loader: path.resolve(__dirname, 'shopify-dev-utils/liquidDev.loader.js'),
+                        options: {
+                            publicPath,
+                            isSection(liquidPath) {
+                                const diff = path.relative(path.join(__dirname, './src/components/'), liquidPath);
+                                const componentType = diff.split(path.sep).shift();
+                                return componentType === 'sections';
+                            }
+                        },
                     },
                 ],
             },
@@ -131,30 +139,7 @@ module.exports = {
                         const targetFolder = diff.split(path.sep)[0];
                         return path.join(targetFolder, path.basename(absolutePath));
                     },
-                    transform: isDevMode
-                        ? function (content, absolutePath) {
-                              const relativePath = path.join(__dirname, 'src');
-                              const diff = path.relative(relativePath, absolutePath);
-
-                              content = content
-                                  .toString()
-                                  .replace(
-                                      /{{\s*'([^']+)'\s*\|\s*asset_url\s*\|\s*(stylesheet_tag|script_tag)\s*}}/g,
-                                      function (matched, fileName, type) {
-                                          if (type === 'stylesheet_tag') {
-                                              if (fileName !== 'tailwind.min.css') {
-                                                  return '';
-                                              }
-                                              return matched;
-                                          }
-
-                                          return `<script src="${publicPath}assets/${fileName}"></script>`;
-                                      }
-                                  );
-
-                              return `<!-- hmr-start: ./${diff} -->${content}<!-- hmr-end: ./${diff} -->`;
-                          }
-                        : undefined,
+                    transform: isDevMode ? transformLiquid(publicPath) : undefined,
                 },
                 {
                     from: 'src/assets/**/*',
