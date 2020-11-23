@@ -61,8 +61,15 @@ module.exports = {
                 use: [
                     'string-loader',
                     {
-                        loader: path.resolve(__dirname, 'liquidDev.loader.js'),
-                        options: { publicPath },
+                        loader: path.resolve(__dirname, 'shopify-dev-utils/liquidDev.loader.js'),
+                        options: {
+                            publicPath,
+                            isSection(liquidPath) {
+                                const diff = path.relative(path.join(__dirname, './src/components/'), liquidPath);
+                                const componentType = diff.split(path.sep).shift();
+                                return componentType === 'sections';
+                            }
+                        },
                     },
                 ],
             },
