@@ -2,6 +2,7 @@ const loaderUtils = require('loader-utils');
 const path = require('path');
 const { Liquid } = require('liquidjs');
 const glob = require('glob');
+const { fetchStoreData } = require('./storeData');
 const { liquidSectionTags } = require('./section-tags/index');
 
 const liquidFiles = [
@@ -16,7 +17,8 @@ const liquidFiles = [
 
 const engine = new Liquid({
   root: liquidFiles, // root for layouts/includes lookup
-  extname: '.liquid', // used for layouts/includes, defaults ""
+  extname: '.liquid', // used for layouts/includes, defaults "",
+  globals: fetchStoreData()
 });
 
 engine.registerFilter('asset_url', function (v) {
@@ -26,7 +28,7 @@ engine.registerFilter('asset_url', function (v) {
 });
 
 engine.registerFilter('paginate', function (_v) {
-  return ``; // in Dev mode we load css from js for HMR
+  return ``;
 });
 
 engine.registerFilter('stylesheet_tag', function (_v) {
