@@ -1,17 +1,22 @@
 {% for collection in collections %}
-  {% unless collection.handle == 'frontpage' %}
-    {% capture collection_title %}{{ collection.title | escape }}{% endcapture %}
-    <a href="{{ collection.url }}">More {{ collection_title }} &rsaquo;</a>
-    {% for product in collection.products limit:5 %}
-      {% assign grid_item_width = 'large--one-fifth medium--one-half' %}
-      <div>
-        <a href="{{ product.url | within: collection }}">{{ product.title }}</a>
-        {{ product.price | money }}
-        {% unless product.available %}<br><strong>sold out</strong>{% endunless %}
-        <a href="{{ product.url | within: collection }}">
-          <img src="{{ product.featured_image.src | img_url: 'large' }}" alt="{{ product.featured_image.alt | escape }}">
-        </a>
+{% unless collection.handle == 'frontpage' %}
+{% capture collection_title %}{{ collection.title | escape }}{% endcapture %}
+<a href="{{ collection.url }}">More {{ collection_title }} &rsaquo;</a>
+<div class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-6">
+  {% for product in collection.products limit:5 %}
+  <a href="{{ product.url | within: collection }}">
+    <div class="w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden">
+      <div class="px-5 py-3">
+        <img class="flex items-end justify-end" src="{{ product.featured_image.src | img_url: 'large' }}"
+          alt="{{ product.featured_image.alt | escape }}">
+        <h3 class="text-gray-700 uppercase">{{ product.title }}</h3>
+        {% unless product.available %}
+        <span class="text-gray-500 mt-2">sold out</span>
+        {% endunless %}
       </div>
-    {% endfor %}
-  {% endunless %}
+    </div>
+  </a>
+  {% endfor %}
+</div>
+{% endunless %}
 {% endfor %}
