@@ -5,6 +5,7 @@ First off, thank you for considering contributing to A Shopify Theme with Themek
 ### Where do I go from here?
 
 If you notice a bug or have a feature request, [make one](https://github.com/activeadmin/activeadmin/issues/new)! I'm no pro, creating issues helps improve this repo and helps learn about all that is involved building themes.
+Please make sure to check the [CODE_OF_CONDUCT.md](https://github.com/3daddict/themekit-webpack/blob/master/CODE_OF_CONDUCT.md) before contributing to this repo.
 
 ### Fork & create a branch
 

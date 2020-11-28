@@ -3,6 +3,11 @@
 # Shopify ThemeKit with Webpack 4
 This is a starter Theme using Webpack, ThemeKit and TailwindCSS for developing Shopify themes with modern build tools. The goal is to create a tool with a component-based folder structure and is easy to use.
 
+## Contributing
+To contribute to this repo please see
+- [CONTRIBUTING.md](https://github.com/3daddict/themekit-webpack/blob/master/CONTRIBUTING.md)
+- [CODE_OF_CONDUCT.md](https://github.com/3daddict/themekit-webpack/blob/master/CODE_OF_CONDUCT.md)
+
 ## 🎯 Goals
 - [x] Component based folder structure
 - [x] ES6 Modules
@@ -94,4 +99,4 @@ In the event that you find the HMR assets are not loading and the requests to lo
 ## 🛣️ Roadmap
 - [ ] Finalization and First Release
 - [x] Update copy-webpack-plugin to v6 [Issue #519](https://github.com/webpack-contrib/copy-webpack-plugin/issues/519) Thanks [@felixmosh](https://github.com/felixmosh)!
-- [ ] Webpack 5? 🤔
+- [x] Webpack 5? 🤔 Thanks [@felixmosh](https://github.com/felixmosh)!
