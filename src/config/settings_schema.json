@@ -26,14 +26,6 @@
           {
             "value": "default_pagination",
             "label": "Default Pagination"
-          },
-          {
-            "value": "infinite_load",
-            "label": "Infinite Load"
-          },
-          {
-            "value": "infinite_scroll",
-            "label": "Infinite Scroll"
           }
         ],
         "default": "accessable_pagination",

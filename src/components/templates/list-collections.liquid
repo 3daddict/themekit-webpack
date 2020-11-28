@@ -31,12 +31,6 @@
     {%- if settings.pagination_type == 'default_pagination' -%}
     {% include 'default-pagination' %}
     {%- endif -%}
-    {%- if settings.pagination_type == 'infinite_load' -%}
-    {% include 'infinite_load' %}
-    {%- endif -%}
-    {%- if settings.pagination_type == 'infinite_scroll' -%}
-    {% include 'infinite_scroll' %}
-    {%- endif -%}
   {%- endif -%}
   {%- endpaginate -%}
 </section>
