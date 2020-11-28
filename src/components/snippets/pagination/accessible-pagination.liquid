@@ -1,0 +1,33 @@
+{%- if paginate.pages > 1 -%}
+<nav role="navigation" class="my-12">
+    <ul class="flex justify-center pl-0 list-none rounded my-2">
+        {%- if paginate.previous-%}
+        <li class="relative block py-2 px-3 leading-tight bg-white border border-gray-300 text-blue-700 border-r-0 ml-0 rounded-l hover:bg-gray-200">
+            <a class="page-link" href="{{ paginate.previous.url }}">Previous</a>
+        </li>
+        {%- else -%}
+        <li class="relative block py-2 px-3 leading-tight bg-white border border-gray-300 text-gray-500 border-r-0 ml-0 rounded-l cursor-not-allowed">Previous</li>
+        {%- endif -%}
+
+        {%- for part in paginate.parts -%}
+        {%- if part.is_link -%}
+        <li class="relative block py-2 px-3 leading-tight bg-white border border-gray-300 text-blue-700 border-r-0 hover:bg-gray-200">
+            <a class="page-link" href="{{ part.url }}">{{ part.title }}</a>
+        </li>
+        {%- else -%}
+        {%- if part.title == paginate.current_page -%}
+        <li class="relative block py-2 px-3 leading-tight border border-gray-300 border-r-0 bg-blue-400 text-white">{{ part.title }}</li>
+        {%- else -%}
+        <li class="relative block py-2 px-3 leading-tight bg-white border border-gray-300 text-blue-700 border-r-0 hover:bg-gray-200">{{ part.title }}</li>
+        {%- endif -%}
+        {%- endif -%}
+        {%- endfor -%}
+
+        {%- if paginate.next -%}
+        <li class="relative block py-2 px-3 leading-tight bg-white border border-gray-300 text-blue-700 rounded-r hover:bg-gray-200"><a class="page-link" href="{{ paginate.next.url }}">Next</a></li>
+        {%- else -%}
+        <li class="relative block py-2 px-3 leading-tight bg-white border border-gray-300 text-gray-500 border-r-0 ml-0 rounded-l cursor-not-allowed">Next</li>
+        {%- endif -%}
+    </ul>
+</nav>
+{%- endif -%}

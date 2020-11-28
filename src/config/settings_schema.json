@@ -1,10 +1,44 @@
-[
-  {
+[{
     "name": "theme_info",
-    "theme_name": "Themekit template theme",
+    "theme_name": "Themekit Webpack",
     "theme_version": "1.0.0",
-    "theme_author": "Shopify",
+    "theme_author": "Mike Salvati",
     "theme_documentation_url": "https://github.com/Shopify/themekit",
     "theme_support_url": "https://github.com/Shopify/themekit/issues"
+  },
+  {
+    "name": "Pagination Settings",
+    "settings": [{
+        "type": "checkbox",
+        "id": "pagination",
+        "label": "Enable Pagination",
+        "default": true,
+        "info": "Toggle ON/OFF Pagination"
+      },
+      {
+        "type": "radio",
+        "id": "pagination_type",
+        "label": "Pagination Type",
+        "options": [{
+            "value": "accessable_pagination",
+            "label": "Accessible Pagination"
+          },
+          {
+            "value": "default_pagination",
+            "label": "Default Pagination"
+          },
+          {
+            "value": "infinite_load",
+            "label": "Infinite Load"
+          },
+          {
+            "value": "infinite_scroll",
+            "label": "Infinite Scroll"
+          }
+        ],
+        "default": "accessable_pagination",
+        "info": "Select Pagination Style"
+      }
+    ]
   }
 ]
