@@ -1,30 +1,63 @@
 {% assign current_variant = product.selected_or_first_available_variant %}
 {% assign featured_image = current_variant.featured_image | default: product.featured_image %}
-
-<img src="{{ featured_image | img_url: 'large' }}" alt="{{ featured_image.alt | escape }}" id="ProductPhotoImg">
-{% for image in product.images %}
-  <a href="{{ image.src | img_url: 'large' }}">
-    <img src="{{ image.src | img_url: 'compact' }}" alt="{{ image.alt | escape }}">
-  </a>
-{% endfor %}
-<h1>{{ product.title }}</h1>
-<form action="/cart/add" method="post" enctype="multipart/form-data" id="AddToCartForm">
-  <select name="id" id="productSelect">
-    {% for variant in product.variants %}
-      {% if variant.available %}
-        <option value="{{ variant.id }}">
-          {{ variant.title }} - {{ variant.price | money_with_currency }}
-        </option>
-      {% else %}
-        <option disabled="disabled">
-          {{ variant.title }} - sold out
-        </option>
-      {% endif %}
-    {% endfor %}
-  </select>
-  {{ current_variant.price | money }}
-  <label for="Quantity">quantity</label>
-  <input type="number" id="Quantity" name="quantity" value="1" min="1">
-  <button type="submit" name="add" id="AddToCart">Add to cart</button>
-</form>
-<div>{{ product.description }}</div>
+<section class="text-gray-700 body-font overflow-hidden bg-white">
+  <div class="container px-5 py-24 mx-auto">
+    <div class="lg:w-4/5 mx-auto flex flex-wrap">
+      <img alt="{{ featured_image.alt | escape }}"
+        class="lg:w-1/2 w-full object-cover object-center rounded border border-gray-200"
+        src="{{ featured_image | img_url: 'large' }}">
+      <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
+        {%- comment -%}<h2 class="text-sm title-font text-gray-500 tracking-widest">BRAND NAME</h2>{%- endcomment -%}
+        <h1 class="text-gray-900 text-3xl title-font font-medium mb-1">{{ product.title }}</h1>
+        <p class="leading-relaxed">{{ product.content }}</p>
+        <form action="/cart/add" method="post" enctype="multipart/form-data" id="AddToCartForm">
+          <div class="flex mt-6 items-center pb-5 border-b-2 border-gray-200 mb-5">
+            <div class="flex ml-6 items-center">
+              <span class="mr-3">Color</span>
+              <div class="relative">
+                <select
+                  class="rounded border appearance-none border-gray-400 py-2 focus:outline-none focus:border-red-500 text-base pl-3 pr-10">
+                  {% for color_option in product.options_by_name['Color'].values %}
+                  <option>{{ color_option }}</option>
+                  {% endfor %}
+                </select>
+                <span
+                  class="absolute right-0 top-0 h-full w-10 text-center text-gray-600 pointer-events-none flex items-center justify-center">
+                  <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    class="w-4 h-4" viewBox="0 0 24 24">
+                    <path d="M6 9l6 6 6-6"></path>
+                  </svg>
+                </span>
+              </div>
+            </div>
+            <div class="flex ml-6 items-center">
+              <span class="mr-3">Size</span>
+              <div class="relative">
+                <select
+                  class="rounded border appearance-none border-gray-400 py-2 focus:outline-none focus:border-red-500 text-base pl-3 pr-10">
+                  {% for color_option in product.options_by_name['Size'].values %}
+                  <option>{{ color_option }}</option>
+                  {% endfor %}
+                </select>
+                <span
+                  class="absolute right-0 top-0 h-full w-10 text-center text-gray-600 pointer-events-none flex items-center justify-center">
+                  <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    class="w-4 h-4" viewBox="0 0 24 24">
+                    <path d="M6 9l6 6 6-6"></path>
+                  </svg>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="flex">
+            <span
+              class="title-font font-medium text-2xl text-gray-900">{{ product.price | money_without_trailing_zeros }}</span>
+            <button
+              class="flex ml-auto text-white bg-blue-500 border-0 py-2 px-6 focus:outline-none hover:bg-blue-600 rounded"
+              type="submit" name="add" id="AddToCart">ADD TO CART</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
