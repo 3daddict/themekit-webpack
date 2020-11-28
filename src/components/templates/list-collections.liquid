@@ -6,12 +6,12 @@
   <a href="{{ collection.url }}">{{ collection_title }} &rsaquo;</a>
   <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-6">
     {%- for product in collection.products limit:4 -%}
-    <a href="{{ product.url | within: collection }}">
+    <a class="mx-auto" href="{{ product.url | within: collection }}">
       <div class="w-full max-w-sm mx-auto my-6 rounded-md shadow-md overflow-hidden">
         <div class="px-5 py-3">
           <img class="flex items-end justify-end" src="{{ product.featured_image.src | img_url: 'large' }}"
             alt="{{ product.featured_image.alt | escape }}">
-          <h3 class="text-gray-700 uppercase">{{ product.title }}</h3>
+          <h3 class="text-gray-700 h-12 uppercase">{{ product.title }}</h3>
           {%- unless product.available -%}
           <span class="text-gray-500 mt-2">sold out</span>
           {%- endunless -%}
@@ -23,7 +23,7 @@
   {%- endunless -%}
   {%- endfor -%}
 
-  {%- if settings.pagination -%}
+  {%- if settings.pagination and paginate.pages > 1 -%}
   {%- comment -%}Pagination Control in Theme Settings{%- endcomment -%}
     {%- if settings.pagination_type == 'accessable_pagination' -%}
     {% include 'accessible-pagination' %}
