@@ -8,7 +8,6 @@ const WebpackShellPluginNext = require('webpack-shell-plugin-next');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const { transformLiquid } = require('./shopify-dev-utils/transformLiquid');
 
-
 const isDevMode = argv.mode === 'development';
 const stats = isDevMode ? 'errors-warnings' : { children: false };
 const port = 9000;
@@ -46,10 +45,13 @@ module.exports = {
                         options: {
                             publicPath,
                             isSection(liquidPath) {
-                                const diff = path.relative(path.join(__dirname, './src/components/'), liquidPath);
+                                const diff = path.relative(
+                                    path.join(__dirname, './src/components/'),
+                                    liquidPath
+                                );
                                 const componentType = diff.split(path.sep).shift();
                                 return componentType === 'sections';
-                            }
+                            },
                         },
                     },
                 ],
@@ -84,7 +86,7 @@ module.exports = {
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
-                use: ["babel-loader"]
+                use: ['babel-loader'],
             },
         ].filter(Boolean),
     },
@@ -93,7 +95,7 @@ module.exports = {
             cleanStaleWebpackAssets: false,
         }),
         new ESLintPlugin({
-            fix: true
+            fix: true,
         }),
         isDevMode &&
             new WebpackShellPluginNext({
