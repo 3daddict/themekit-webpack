@@ -1,0 +1,10 @@
+{
+    "parser": "babel-eslint",
+    "extends": [
+        "plugin:@shopify/esnext",
+        "plugin:@shopify/node"
+      ],
+    "rules": {
+        "quotes": [2, "single", { "avoidEscape": true }]
+    }
+}
