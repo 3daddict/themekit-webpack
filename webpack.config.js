@@ -5,6 +5,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const WebpackShellPluginNext = require('webpack-shell-plugin-next');
+const ESLintPlugin = require('eslint-webpack-plugin');
 
 
 const isDevMode = argv.mode === 'development';
@@ -59,7 +60,7 @@ module.exports = {
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
-                use: ["babel-loader", "eslint-loader"]
+                use: ["babel-loader"]
             },
             
         ],
@@ -67,6 +68,9 @@ module.exports = {
     plugins: [
         new CleanWebpackPlugin({
             cleanStaleWebpackAssets: false,
+        }),
+        new ESLintPlugin({
+            fix: true
         }),
         isDevMode &&
             new WebpackShellPluginNext({

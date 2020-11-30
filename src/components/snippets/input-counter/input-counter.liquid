@@ -1,0 +1,21 @@
+{{ 'bundle.input-counter.css' | asset_url | stylesheet_tag }}
+
+<div class="custom-number-input flex ml-6 items-center h-10 w-32">
+    <span class="mr-3">QTY</span>
+    <div class="flex flex-row h-10 w-full rounded relative bg-transparent mt-1">
+        <button type="button" id="btn-decrement" data-action="decrement"
+            class="oh-full w-20 rounded-l cursor-pointer border-l border-t border-b border-gray-400 hover:bg-gray-200">
+            <span class="m-auto text-2xl font-thin">−</span>
+        </button>
+        <input type="number"
+            class="text-center w-full bg-white md:text-basecursor-default flex items-center border border-gray-400"
+            name="custom-input-number" value="1"
+            id="counterQty" />
+        <button type="button" id="btn-increment" data-action="increment"
+            class="h-full w-20 rounded-r cursor-pointer border-r border-t border-b border-gray-400 hover:bg-gray-200">
+            <span class="m-auto text-2xl font-thin">+</span>
+        </button>
+    </div>
+</div>
+
+{{ 'bundle.input-counter.js' | asset_url | script_tag }}
