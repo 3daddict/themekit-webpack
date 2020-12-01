@@ -1,4 +1,3 @@
-// ref: https://shopify.dev/docs/themes/ajax-api/reference/cart
 const base = '/cart';
 
 function send({method, path, data}) {
@@ -38,25 +37,3 @@ export function post(path, data) {
 export function put(path, data) {
 	return send({method: 'PUT', path, data});
 }
-
-// const fetch = require('node-fetch');
-
-// // Add items to cart
-// const addToCart = async (formData) => {
-//   await fetch('/cart/add.js', {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json'
-//       },
-//       body: JSON.stringify(formData)
-//     })
-//     .then(response => {
-//       return response.json();
-//     })
-//     .catch((error) => {
-//       console.error('Error:', error);
-//     });
-// };
-
-// // export to global variables
-// global.addToCart = addToCart;
