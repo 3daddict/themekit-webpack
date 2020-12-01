@@ -1,10 +1,9 @@
 {
     "parser": "babel-eslint",
-    "extends": [
-        "plugin:@shopify/esnext",
-        "plugin:@shopify/node"
-      ],
+    "extends": ["plugin:@shopify/esnext", "plugin:@shopify/node", "prettier"],
     "rules": {
-        "quotes": [2, "single", { "avoidEscape": true }]
+        "quotes": [2, "single", { "avoidEscape": true }],
+        "no-unused-vars": "warn",
+        "no-undef": "off"
     }
 }

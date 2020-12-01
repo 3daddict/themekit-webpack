@@ -1,0 +1,84 @@
+<div class="flex justify-center my-6 mx-6">
+    <div class="flex flex-col w-full p-4">
+        <div class="flex-1">
+            <form action="/cart" method="post" novalidate>
+                <table class="w-full text-sm lg:text-base" cellspacing="0">
+                    <thead>
+                        <tr class="h-12 uppercase">
+                            <th class="hidden md:table-cell"></th>
+                            <th class="text-left">Product</th>
+                            <th class="lg:text-right text-left pl-5 lg:pl-0">
+                                <span class="lg:hidden" title="Quantity">QTY</span>
+                                <span class="hidden lg:inline">Quantity</span>
+                            </th>
+                            <th class="hidden text-right md:table-cell">Unit Price</th>
+                            <th class="text-right">Total Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {%- for item in cart.items -%}
+                        <tr>
+                            <td class="hidden pb-4 md:table-cell">
+                                <a href="{{ item.url | within: collections.all }}">
+                                    <img src="{{ item | img_url: 'medium' }}" alt="{{ item.title | escape }}"
+                                        class="w-20 rounded" alt="Thumbnail">
+                                </a>
+                            </td>
+                            <td>
+                                <a href="{{ item.url }}">
+                                    <p class="mb-2 md:ml-4">{{ item.product.title }}</p>
+                                    <button type="button" class="text-gray-700 md:ml-4">
+                                        <small>
+                                            <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0">Remove</a>
+                                        </small>
+                                    </button>
+                                </a>
+                            </td>
+                            <td class="justify-center md:justify-end md:flex mt-6">
+                                <div class="w-20 h-10">
+                                    <div class="relative flex flex-row w-full h-8">
+                                        <input type="number" name="updates[]" id="updates_{{ item.key }}"
+                                            value="{{ item.quantity }}" min="0"
+                                            class="w-full font-semibold text-center text-gray-700 bg-gray-200 outline-none focus:outline-none hover:text-black focus:text-black" />
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="hidden text-right md:table-cell">
+                                <span class="text-sm lg:text-base">
+                                    {%- if item.original_line_price != item.line_price -%}{{ item.original_line_price | money }}{%- endif -%}
+                                    {{ item.line_price | money }}
+                                    {%- for discount in item.discounts -%}{{ discount.title }}{%- endfor -%}
+                                </span>
+                            </td>
+                            <td class="text-right">
+                                <span class="text-sm lg:text-base">
+                                    {{ item.line_price | times: item.quantity | money }}
+                                </span>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <div class="py-4 float-right">
+                    <div class="flex justify-between">
+                        <div class="lg:py-2 m-2">
+                            Subtotal
+                        </div>
+                        <div class="lg:py-2 m-2">
+                            {{ cart.total_price | money }}
+                        </div>
+                    </div>
+                    <div class="flex">
+                        <button type="submit" name="update"
+                            class="flex justify-center px-10 py-3 mt-6 text-white uppercase bg-blue-500 rounded hover:bg-blue-700 mx-2">
+                            UPDATE
+                        </button>
+                        <button type="submit" name="checkout"
+                            class="flex justify-center px-10 py-3 mt-6 text-white uppercase bg-blue-500 rounded hover:bg-blue-700 mx-2">
+                            CHECKOUT
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
