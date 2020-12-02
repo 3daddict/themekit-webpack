@@ -16,7 +16,7 @@ To contribute to this repo please see
 - [x] Hot Module Reloading - Thanks [@felixmosh](https://github.com/felixmosh)!
 - [ ] Lazy Loading
 - [x] Prettier Formatting
-- [ ] Linter
+- [x] Linter
 - [ ] Prefetch and Preload
 - [ ] Fonts & Theme Setting
 - [x] [TailwindCSS](https://tailwindcss.com/)
@@ -100,3 +100,4 @@ In the event that you find the HMR assets are not loading and the requests to lo
 - [ ] Finalization and First Release
 - [x] Update copy-webpack-plugin to v6 [Issue #519](https://github.com/webpack-contrib/copy-webpack-plugin/issues/519) Thanks [@felixmosh](https://github.com/felixmosh)!
 - [x] Webpack 5? 🤔 Thanks [@felixmosh](https://github.com/felixmosh)!
+- [X] TailwindCSS v2
