@@ -16,7 +16,7 @@ To contribute to this repo please see
 - [x] Hot Module Reloading - Thanks [@felixmosh](https://github.com/felixmosh)!
 - [ ] Lazy Loading
 - [x] Prettier Formatting
-- [ ] Linter
+- [x] Linter
 - [ ] Prefetch and Preload
 - [ ] Fonts & Theme Setting
 - [x] [TailwindCSS](https://tailwindcss.com/)
@@ -65,6 +65,9 @@ Install Clean-CSS CLI
 `yarn add clean-css-cli -g`  
 **Note:** Global install via -g option is recommended unless you want to execute the binary via a relative path, i.e. ./node_modules/.bin/cleancss
 
+## TailwindCSS
+This project uses [TailwindCSS](https://tailwindcss.com/) `v2` a utility-first CSS framework packed with classes like flex, pt-4, text-center and rotate-90 that can be composed to build any design, directly in your markup. Checkout the amazing [documentation](https://tailwindcss.com/docs) and start adding classes to your elements.
+
 ## Getting Started
 - Install dependencies `yarn install` or `npm i`
 - Rename the `config.yml.example` to `config.yml` and add the Shopify Theme credentials
@@ -100,3 +103,4 @@ In the event that you find the HMR assets are not loading and the requests to lo
 - [ ] Finalization and First Release
 - [x] Update copy-webpack-plugin to v6 [Issue #519](https://github.com/webpack-contrib/copy-webpack-plugin/issues/519) Thanks [@felixmosh](https://github.com/felixmosh)!
 - [x] Webpack 5? 🤔 Thanks [@felixmosh](https://github.com/felixmosh)!
+- [X] TailwindCSS v2
