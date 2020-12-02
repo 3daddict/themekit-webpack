@@ -65,6 +65,9 @@ Install Clean-CSS CLI
 `yarn add clean-css-cli -g`  
 **Note:** Global install via -g option is recommended unless you want to execute the binary via a relative path, i.e. ./node_modules/.bin/cleancss
 
+## TailwindCSS
+This project uses [TailwindCSS](https://tailwindcss.com/) `v2` a utility-first CSS framework packed with classes like flex, pt-4, text-center and rotate-90 that can be composed to build any design, directly in your markup. Checkout the amazing [documentation](https://tailwindcss.com/docs) and start adding classes to your elements.
+
 ## Getting Started
 - Install dependencies `yarn install` or `npm i`
 - Rename the `config.yml.example` to `config.yml` and add the Shopify Theme credentials
