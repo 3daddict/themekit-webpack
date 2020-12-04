@@ -18,7 +18,7 @@ To contribute to this repo please see
 - [x] Prettier Formatting
 - [x] Linter
 - [ ] Prefetch and Preload
-- [ ] Fonts & Theme Setting
+- [x] Fonts & Theme Setting
 - [x] [TailwindCSS](https://tailwindcss.com/)
 
 ## 📁 Folder Structure
