@@ -28,9 +28,12 @@
   {%- endcapture -%}
   <title>{{ seo_title | strip }}</title>
 
-  {{ content_for_header }} <!-- Header hook for plugins -->
+  {%- comment -%}Varibles{%- endcomment -%}
+  {{ content_for_header }}
+  {% include 'global-css' %}
+  
   {{ 'tailwind.min.css' | asset_url | stylesheet_tag }}
-  {{ 'bundle.theme.css' | asset_url | stylesheet_tag }}
+  {{ 'bundle.global-css.css' | asset_url | stylesheet_tag }}
   {{ 'bundle.theme.js' | asset_url | script_tag }}
 </head>
 <body id="{{ page_title | handle }}" class="template-{{ template.name | handle }}">
