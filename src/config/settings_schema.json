@@ -32,5 +32,30 @@
         "info": "Select Pagination Style"
       }
     ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Headings and Buttons"
+      },
+      {
+        "type": "font_picker",
+        "id": "font_heading",
+        "default": "archivo_n6",
+        "label": "Headings"
+      },
+      {
+        "type": "header",
+        "content": "Body Text"
+      },
+      {
+        "type": "font_picker",
+        "id": "font_body",
+        "default": "roboto_n4",
+        "label": "Body text"
+      }
+    ]
   }
 ]

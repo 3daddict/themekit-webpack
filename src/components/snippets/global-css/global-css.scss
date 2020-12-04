@@ -1,0 +1,28 @@
+//
+// Typography
+$font-heading: var(--font-heading);
+$font-body: var(--font-body);
+$font-heading-base-size: var(--font-text-base-size);
+$font-body-weight: var(--font-body-weight);
+$font-body-style: var(--font-body-style);
+$font-body-bold-weight: var(--font-body-bold-weight);
+
+html {
+    font-size: 16px;
+}
+
+body {
+    font-family: $font-body;
+    font-weight: $font-body-weight;
+    font-style: $font-body-style;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: $font-heading;
+}
+
