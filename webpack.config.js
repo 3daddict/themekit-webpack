@@ -39,7 +39,7 @@ module.exports = {
             isDevMode && {
                 test: /\.liquid$/,
                 use: [
-                    'string-loader',
+                    { loader: 'raw-loader', options: { esModule: false } },
                     {
                         loader: path.resolve(__dirname, 'shopify-dev-utils/liquidDev.loader.js'),
                         options: {
@@ -52,23 +52,6 @@ module.exports = {
                                 const componentType = diff.split(path.sep).shift();
                                 return componentType === 'sections';
                             },
-                        },
-                    },
-                ],
-            },
-            {
-                test: /\.liquid$/,
-                use: [
-                    'string-loader',
-                    {
-                        loader: path.resolve(__dirname, 'shopify-dev-utils/liquidDev.loader.js'),
-                        options: {
-                            publicPath,
-                            isSection(liquidPath) {
-                                const diff = path.relative(path.join(__dirname, './src/components/'), liquidPath);
-                                const componentType = diff.split(path.sep).shift();
-                                return componentType === 'sections';
-                            }
                         },
                     },
                 ],

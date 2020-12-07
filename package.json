@@ -21,6 +21,7 @@
     "@shopify/eslint-plugin": "^39.0.3",
     "@shopify/themekit": "^1.1.6",
     "autoprefixer": "^10.0.4",
+    "axios": "^0.21.0",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.1.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
@@ -42,8 +43,9 @@
     "postcss": "^8.1.10",
     "postcss-loader": "^4.0.4",
     "prettier": "^2.1.2",
+    "raw-loader": "^4.0.2",
+    "sass": "^1.29.0",
     "sass-loader": "^10.1.0",
-    "string-loader": "^0.0.1",
     "style-loader": "^2.0.0",
     "tailwindcss": "^2.0.1",
     "transform-class-properties": "^1.0.0-beta",
@@ -52,6 +54,7 @@
     "webpack-cli": "^4.2.0",
     "webpack-dev-server": "^3.11.0",
     "webpack-shell-plugin-next": "^2.0.8",
+    "yaml": "^1.10.0",
     "yargs": "^16.1.0"
   }
 }

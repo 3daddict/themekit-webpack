@@ -29,7 +29,7 @@ engine.registerFilter('asset_url', function (v) {
 });
 
 engine.registerFilter('stylesheet_tag', function (_v) {
-    return ``; // in Dev mode we load css from js for HMR
+    return ''; // in Dev mode we load css from js for HMR
 });
 
 engine.registerFilter('script_tag', function (v) {

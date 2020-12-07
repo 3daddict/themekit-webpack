@@ -1,4 +1,8 @@
-const context = require.context('../src', true, /(header|message)\.liquid$/);
+const context = require.context(
+    '../src',
+    true,
+    /(collection|footer|featured-product|featured-collection|header|message)\.liquid$/
+);
 
 const cache = {};
 
@@ -22,7 +26,11 @@ function replaceHtml(key, startCommentNode) {
 
 if (module.hot) {
     module.hot.accept(context.id, function () {
-        const newContext = require.context('../src', true, /(header|message)\.liquid$/);
+        const newContext = require.context(
+            '../src',
+            true,
+            /(collection|footer|featured-product|featured-collection|header|message)\.liquid$/
+        );
         const changes = [];
         newContext.keys().forEach(function (key) {
             const newFile = newContext(key);
