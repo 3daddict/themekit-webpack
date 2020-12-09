@@ -39,10 +39,19 @@ function generatePaginateObj({ offset, perPage, total }) {
     }
     return paginate;
 }
-function populateVariableObj({ data, depth }) {
-    return depth.reverse().reduce((result, prop) => {
-        return { [prop.getText()]: result };
-    }, data);
+function populateVariableObj({ list, originalValue, depth }) {
+    if (depth.length === 0) {
+        return list;
+    }
+    const clone = JSON.parse(JSON.stringify(originalValue));
+    depth.reduce((result, prop, index) => {
+        const propName = prop.getText();
+        if (index === depth.length - 1) {
+            result[propName] = list;
+        }
+        return result[propName] || {};
+    }, clone);
+    return clone;
 }
 exports.Paginate = {
     parse: function (tagToken, remainTokens) {
@@ -75,9 +84,11 @@ exports.Paginate = {
         const currentPage = +ctx.get(['current_page']);
         const offset = currentPage ? (currentPage - 1) * perPage : 0;
         const variableName = this.args.list.getVariableAsText();
+        const originalValue = ctx.get([variableName]);
         const scopeList = list.slice(offset, offset + perPage);
         const data = populateVariableObj({
-            data: scopeList,
+            list: scopeList,
+            originalValue,
             depth: this.args.list.props
         });
         const paginate = generatePaginateObj({
