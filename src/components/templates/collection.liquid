@@ -1,16 +1,16 @@
 <section class="mx-3">
   {% paginate collection.products by 8 %}
-  <h1>{{ collection.title }}</h1>
-  <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-4">
+    <h1>{{ collection.title }}</h1>
+    <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-4">
     {% for product in collection.products %}
     <a class="mx-auto" href="{{ product.url | within: collection }}">
       <div class="max-w-xs bg-white shadow-lg rounded-lg overflow-hidden my-6">
         <div class="px-4 py-2">
           <h2 class="text-gray-900 font-bold text-lg h-12 uppercase">{{ product.title }}</h2>
-          <p class="text-gray-600 text-sm mt-1">{{ product.content | truncate: 40 }}</p>
+          <p class="text-gray-600 text-sm mt-1">{{ product.description | strip_html | truncate: 40 }}</p>
         </div>
         <img class="h-56 w-full object-cover mt-2" src="{{ product.featured_image.src | img_url: 'large' }}"
-          alt="{{ product.featured_image.alt | escape }}">
+          alt="{{ product.featured_image.alt | escape }}" />
         <div class="flex items-center justify-between p-4">
           <h1 class="text-gray-900 font-bold text-xl">{{ product.price | money_without_trailing_zeros }}</h1>
           <button
@@ -24,13 +24,12 @@
     {% endfor %}
   </div>
   {%- if settings.pagination and paginate.pages > 1 -%}
-  {%- comment -%}Pagination Control in Theme Settings{%- endcomment -%}
-  {%- if settings.pagination_type == 'accessable_pagination' -%}
-  {% include 'accessible-pagination' %}
-  {%- endif -%}
-  {%- if settings.pagination_type == 'default_pagination' -%}
-  {% include 'default-pagination' %}
-  {%- endif -%}
+    {%- comment -%}Pagination Control in Theme Settings{%- endcomment -%}
+    {%- if settings.pagination_type == 'accessable_pagination' -%}
+      {% include 'accessible-pagination' %}
+    {%- elsif settings.pagination_type == 'default_pagination' -%}
+      {% include 'default-pagination' %}
+    {%- endif -%}
   {%- endif -%}
   {% endpaginate %}
 </section>

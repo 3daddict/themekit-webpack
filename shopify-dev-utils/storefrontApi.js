@@ -18,11 +18,59 @@ class StorefrontApi {
             .post(
                 '',
                 `
-query {
+{
   shop {
     name
   }
-}`
+  collections(first: 50) {
+    edges {
+      node {
+        id
+        title
+        handle
+        description
+        image(scale:1) {
+          id
+          altText
+          originalSrc
+          transformedSrc
+        }
+        products(first: 50) {
+          edges {
+            node {
+              id
+              title
+              description
+              handle
+              availableForSale
+              priceRange {
+                maxVariantPrice {
+                  amount
+                  currencyCode
+                }
+                minVariantPrice {
+                  amount
+                  currencyCode
+                }
+              }
+              images(first: 1) {
+                edges {
+                  node {
+                    id
+                    altText
+                    originalSrc
+                  }
+                }
+              }
+              onlineStoreUrl
+            }
+          }
+        }
+      }
+    }
+  }
+}
+`
             )
             .then(({ data }) => data);
     }

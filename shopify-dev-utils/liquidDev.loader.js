@@ -6,41 +6,61 @@ const { fetchStoreData } = require('./storeData');
 const { liquidSectionTags } = require('./section-tags/index');
 const { Paginate } = require('./tags/paginate');
 
-const liquidFiles = [
-    ...glob
-        .sync('./src/components/**/*.liquid')
-        .map((filePath) => path.resolve(path.join(__dirname, '../'), path.dirname(filePath)))
-        .reduce((set, dir) => {
-            set.add(dir);
-            return set;
-        }, new Set()),
-];
+let engine;
+let loadPromise;
 
-const engine = new Liquid({
-    root: liquidFiles, // root for layouts/includes lookup
-    extname: '.liquid', // used for layouts/includes, defaults "",
-    globals: fetchStoreData(),
-});
+function initEngine() {
+    if (!loadPromise) {
+        loadPromise = new Promise(async (resolve) => {
+            const liquidFiles = [
+                ...glob
+                    .sync('./src/components/**/*.liquid')
+                    .map((filePath) =>
+                        path.resolve(path.join(__dirname, '../'), path.dirname(filePath))
+                    )
+                    .reduce((set, dir) => {
+                        set.add(dir);
+                        return set;
+                    }, new Set()),
+            ];
 
-engine.registerFilter('asset_url', function (v) {
-    const { publicPath } = this.context.opts.loaderOptions;
+            engine = new Liquid({
+                root: liquidFiles, // root for layouts/includes lookup
+                extname: '.liquid', // used for layouts/includes, defaults "",
+                globals: await fetchStoreData(),
+            });
 
-    return `${publicPath}${v}`;
-});
+            engine.registerFilter('asset_url', function (v) {
+                const { publicPath } = this.context.opts.loaderOptions;
 
-engine.registerFilter('stylesheet_tag', function (_v) {
-    return ''; // in Dev mode we load css from js for HMR
-});
+                return `${publicPath}${v}`;
+            });
 
-engine.registerFilter('script_tag', function (v) {
-    return `<script src="${v}"></script>`;
-});
+            engine.registerFilter('stylesheet_tag', function (_v) {
+                return ''; // in Dev mode we load css from js for HMR
+            });
 
-engine.registerTag('paginate', Paginate);
-engine.plugin(liquidSectionTags());
+            engine.registerFilter('script_tag', function (v) {
+                return `<script src="${v}"></script>`;
+            });
 
-module.exports = function (content) {
+            engine.registerTag('paginate', Paginate);
+            engine.plugin(liquidSectionTags());
+
+            resolve();
+        });
+    }
+
+    return loadPromise;
+}
+
+module.exports = async function (content) {
     if (this.cacheable) this.cacheable();
+    const callback = this.async();
+
+    if (!engine) {
+        await initEngine();
+    }
 
     engine.options.loaderOptions = loaderUtils.getOptions(this);
     const { isSection } = engine.options.loaderOptions;
@@ -50,8 +70,6 @@ module.exports = function (content) {
         const sectionName = path.basename(this.resourcePath, '.liquid');
         content = `{% section "${sectionName}" %}`;
     }
-
-    const callback = this.async();
 
     return engine
         .parseAndRender(content, engine.options.loaderOptions.globals || {})

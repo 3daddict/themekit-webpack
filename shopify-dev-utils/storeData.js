@@ -1,6 +1,7 @@
 const yaml = require('yaml');
 const fs = require('fs');
 const path = require('path');
+const { convertToGlobalDataStructure } = require('./convertToGlobalDataStructure');
 const { StorefrontApi } = require('./storefrontApi');
 
 const configFile = path.join(__dirname, '../config.yml');
@@ -9,14 +10,18 @@ if (fs.existsSync(configFile)) {
     const configYml = yaml.parse(fs.readFileSync(configFile, 'utf-8'));
     config.token = configYml.development.storefront_api_key;
     config.baseURL = configYml.development.store;
+
+    if (!config.token) {
+        console.warn(`'storefront_api_key' was not found in 'config.yml'`);
+    }
 }
 
 async function fetchStoreData() {
     const storefrontApi = new StorefrontApi(config);
 
-    const { data } = await storefrontApi.getStoreData();
-
-    console.log(JSON.stringify(data, null, 2));
+    const data = await storefrontApi
+        .getStoreData()
+        .then(({ data }) => convertToGlobalDataStructure(data));
 
     return {
         shop: {
@@ -40,9 +45,8 @@ async function fetchStoreData() {
                 ],
             },
         },
+        collection: data.collections[0],
     };
 }
-
-fetchStoreData();
 
 module.exports.fetchStoreData = fetchStoreData;
