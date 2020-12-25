@@ -2,6 +2,10 @@ const loaderUtils = require('loader-utils');
 const path = require('path');
 const { Liquid } = require('liquidjs');
 const glob = require('glob');
+const { defaultPagination } = require('./filters/default_pagination');
+const { scriptTag } = require('./filters/script_tag');
+const { stylesheetTag } = require('./filters/stylesheet_tag');
+const { assetUrl } = require('./filters/asset_url');
 const { fetchStoreData } = require('./storeData');
 const { liquidSectionTags } = require('./section-tags/index');
 const { Paginate } = require('./tags/paginate');
@@ -30,19 +34,10 @@ function initEngine() {
                 globals: await fetchStoreData(),
             });
 
-            engine.registerFilter('asset_url', function (v) {
-                const { publicPath } = this.context.opts.loaderOptions;
-
-                return `${publicPath}${v}`;
-            });
-
-            engine.registerFilter('stylesheet_tag', function (_v) {
-                return ''; // in Dev mode we load css from js for HMR
-            });
-
-            engine.registerFilter('script_tag', function (v) {
-                return `<script src="${v}"></script>`;
-            });
+            engine.registerFilter('asset_url', assetUrl);
+            engine.registerFilter('stylesheet_tag', stylesheetTag);
+            engine.registerFilter('script_tag', scriptTag);
+            engine.registerFilter('default_pagination', defaultPagination);
 
             engine.registerTag('paginate', Paginate);
             engine.plugin(liquidSectionTags());
