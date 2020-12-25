@@ -6,7 +6,7 @@ const { defaultPagination } = require('./filters/default_pagination');
 const { scriptTag } = require('./filters/script_tag');
 const { stylesheetTag } = require('./filters/stylesheet_tag');
 const { assetUrl } = require('./filters/asset_url');
-const { fetchStoreData } = require('./storeData');
+const { getStoreGlobalData } = require('./storeData');
 const { liquidSectionTags } = require('./section-tags/index');
 const { Paginate } = require('./tags/paginate');
 
@@ -31,7 +31,7 @@ function initEngine() {
             engine = new Liquid({
                 root: liquidFiles, // root for layouts/includes lookup
                 extname: '.liquid', // used for layouts/includes, defaults "",
-                globals: await fetchStoreData(),
+                globals: await getStoreGlobalData(),
             });
 
             engine.registerFilter('asset_url', assetUrl);

@@ -16,7 +16,22 @@ if (fs.existsSync(configFile)) {
     }
 }
 
-async function fetchStoreData() {
+function getGlobalSettings() {
+    const rawSettings = require('../src/config/settings_schema.json');
+
+    return rawSettings
+        .filter((section) => !!section.settings)
+        .reduce((result, section) => {
+            section.settings
+                .filter((setting) => !!setting.id && typeof setting.default !== 'undefined')
+                .forEach((setting) => {
+                    result[setting.id] = setting.default;
+                });
+            return result;
+        }, {});
+}
+
+async function getStoreGlobalData() {
     const storefrontApi = new StorefrontApi(config);
 
     const data = await storefrontApi
@@ -27,6 +42,7 @@ async function fetchStoreData() {
         shop: {
             name: data.shop.name,
         },
+        settings: getGlobalSettings(),
         linklists: {
             'main-menu': {
                 title: '',
@@ -49,4 +65,4 @@ async function fetchStoreData() {
     };
 }
 
-module.exports.fetchStoreData = fetchStoreData;
+module.exports.getStoreGlobalData = getStoreGlobalData;
