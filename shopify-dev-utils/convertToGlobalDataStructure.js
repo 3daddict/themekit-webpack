@@ -10,7 +10,7 @@ module.exports.convertToGlobalDataStructure = function convertToGlobalDataStruct
             handle: node.handle,
             image: node.image,
             description: node.description,
-            url: 'unknown-url', // TODO: find a way to get the collection url
+            url: `/collections/${node.handle}`,
             products: node.products.edges.map((product) => ({
                 id: product.node.id,
                 title: product.node.title,
@@ -18,7 +18,7 @@ module.exports.convertToGlobalDataStructure = function convertToGlobalDataStruct
                 handle: product.node.handle,
                 available: product.node.availableForSale,
                 price: product.node.priceRange,
-                url: 'unknown-url', // TODO: find a way to get the product url
+                url: `/products/${product.node.handle}`,
                 featured_image:
                     product.node.images.edges.length > 0
                         ? {

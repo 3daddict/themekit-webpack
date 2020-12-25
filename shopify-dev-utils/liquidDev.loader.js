@@ -2,6 +2,7 @@ const loaderUtils = require('loader-utils');
 const path = require('path');
 const { Liquid } = require('liquidjs');
 const glob = require('glob');
+const { within } = require('./filters/within');
 const { defaultPagination } = require('./filters/default_pagination');
 const { scriptTag } = require('./filters/script_tag');
 const { stylesheetTag } = require('./filters/stylesheet_tag');
@@ -38,6 +39,7 @@ function initEngine() {
             engine.registerFilter('stylesheet_tag', stylesheetTag);
             engine.registerFilter('script_tag', scriptTag);
             engine.registerFilter('default_pagination', defaultPagination);
+            engine.registerFilter('within', within);
 
             engine.registerTag('paginate', Paginate);
             engine.plugin(liquidSectionTags());
