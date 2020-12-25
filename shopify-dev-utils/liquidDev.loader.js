@@ -2,6 +2,8 @@ const loaderUtils = require('loader-utils');
 const path = require('path');
 const { Liquid } = require('liquidjs');
 const glob = require('glob');
+const { moneyWithoutTrailingZeros } = require('./filters/money_without_trailing_zeros');
+const { moneyWithCurrency } = require('./filters/money_with_currency');
 const { within } = require('./filters/within');
 const { defaultPagination } = require('./filters/default_pagination');
 const { scriptTag } = require('./filters/script_tag');
@@ -40,6 +42,8 @@ function initEngine() {
             engine.registerFilter('script_tag', scriptTag);
             engine.registerFilter('default_pagination', defaultPagination);
             engine.registerFilter('within', within);
+            engine.registerFilter('money_with_currency', moneyWithCurrency);
+            engine.registerFilter('money_without_trailing_zeros', moneyWithoutTrailingZeros);
 
             engine.registerTag('paginate', Paginate);
             engine.plugin(liquidSectionTags());

@@ -17,7 +17,12 @@ module.exports.convertToGlobalDataStructure = function convertToGlobalDataStruct
                 description: product.node.description,
                 handle: product.node.handle,
                 available: product.node.availableForSale,
-                price: product.node.priceRange,
+                price: product.node.priceRange.maxVariantPrice, // preserve the entire obj for money-* filters
+                price_max: product.node.priceRange.maxVariantPrice,
+                price_min: product.node.priceRange.minVariantPrice,
+                price_varies:
+                    +product.node.priceRange.maxVariantPrice.amount !==
+                    +product.node.priceRange.minVariantPrice,
                 url: `/products/${product.node.handle}`,
                 featured_image:
                     product.node.images.edges.length > 0
