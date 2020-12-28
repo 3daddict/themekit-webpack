@@ -3,11 +3,15 @@
 {{ content_for_index }}
 
 <section class="test z-50">
-    {% include 'dynamic-modal', 
-    id: 'homePageTestModal',
-    openModalBtn: 'testButton',
-    title: 'Testing Title Variable',
-    body: 'Testing the Dynamic Body Of the Modal...',
-    button2: 'Button 2 Test'
+    {% include "dynamic-modal", 
+    id: "homePageTestModal",
+    openModalBtn: "testButton",
+    title: "Testing Title Variable",
+    body: "Testing the Dynamic Body Of the Modal...",
+    buttonOne: "Alert",
+    buttonOneFunction: "alert('> do you struggle with impostor syndrome? Me: no I’m great at it')"
+    buttonTwo: "Close",
+    buttonTwoStyle: "text-white bg-red-500 hover:bg-red-700"
+    buttonTwoFunction: "modal.style.display = 'none';"
     %}
 </section>

@@ -1,11 +1,14 @@
 {%- comment -%}Assign Modal Variables{%- endcomment -%}
-{% assign id = 'defaultModal' %}
-{% assign openModalBtn = 'defaultOpenButton' %}
-
-{% assign title = 'Modal Title' %}
-{% assign body = 'Modal Body' %}
-{% assign button1 = null %}
-{% assign button2 = null %}
+{% assign id = "defaultModal" %}
+{% assign openModalBtn = "defaultOpenButton" %}
+{% assign title = "Modal Title" %}
+{% assign body = "Modal Body" %}
+{% assign buttonOne = null %}
+{% assign buttonOneStyle = "text-white bg-blue-500 hover:bg-blue-700" %}
+{% assign buttonOneFunction = "javascript:void(0);" %}
+{% assign buttonTwo = null %}
+{% assign buttonTwoStyle = "text-white bg-transparent hover:bg-blue-700 text-blue-500 hover:text-white border border-blue-500 hover:border-transparent" %}
+{% assign buttonTwoFunction = "javascript:void(0);" %}
 
 <section class="hidden" id="{{ id }}">
     <div class="flex items-center justify-center fixed left-0 bottom-0 w-full h-full bg-black bg-opacity-75" id="modalContainer">
@@ -25,14 +28,18 @@
                 <div class="my-4">{{ body }}</div>
                 <hr>
                 <div class="ml-auto my-2">
-                    {%- if button1 -%}
-                        <button class="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded mx-2">
-                            {{ button1 }}
+                    {%- if buttonOne -%}
+                        <button 
+                        class="{{ buttonOneStyle }} mx-2 py-2 px-4 rounded"
+                        onclick="{{ buttonOneFunction }}">
+                            {{ buttonOne }}
                         </button>
                     {%- endif -%}
-                    {%- if button2 -%}
-                        <button class="bg-transparent hover:bg-gray-500 text-blue-700 hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded mx-2">
-                            {{ button2 }}
+                    {%- if buttonTwo -%}
+                        <button 
+                        class="{{ buttonTwoStyle }} mx-2 py-2 px-4 rounded"
+                        onclick="{{ buttonTwoFunction }}">
+                            {{ buttonTwo }}
                         </button>
                     {%- endif -%}
                 </div>
