@@ -103,10 +103,10 @@ In the event that you find the HMR assets are not loading and the requests to lo
 This is not unique to this project but it's worth mentioning and creating a component example. See the `src/components/snippets/dynamic-modal/dynamic-modal.liquid` component. This is a simple modal that uses variable scope for data, styles and functions.
 In this file we assign some default variables.
 ```html
-{% assign id = "defaultModal" %}
-{% assign openModalBtn = "defaultOpenButton" %}
-{% assign title = "Modal Title" %}
-{% assign body = "Modal Body" %}
+{%- assign id = "defaultModal" -%}
+{%- assign openModalBtn = "defaultOpenButton" -%}
+{%- assign title = "Modal Title" -%}
+{%- assign body = "Modal Body" -%}
 ```
 Use this `dynamic-modal.liquid` component by creating a trigger element like a button with an id.
 ```html
@@ -114,7 +114,7 @@ Use this `dynamic-modal.liquid` component by creating a trigger element like a b
 ```
 Next we include the modal in a section with declared variables. These will be scoped to the snippet and we now have a dynamic reusable modal component we can use throughout our theme.
 ```html
-{% include "dynamic-modal", 
+{%- include "dynamic-modal", 
     id: "homePageTestModal",
     openModalBtn: "testButton",
     title: "Testing Title Variable",
@@ -124,7 +124,7 @@ Next we include the modal in a section with declared variables. These will be sc
     buttonTwo: "Close",
     buttonTwoStyle: "text-white bg-red-500 hover:bg-red-700"
     buttonTwoFunction: "modal.style.display = 'none';"
-%}
+-%}
 ```
 Read more on this [Shopify Variable Scopes](https://ellodave.dev/blog/2019/5/24/shopify-variable-scopes/). If you find some good use cases for these please post them in the [discussion ideas category](https://github.com/3daddict/themekit-webpack/discussions/categories/ideas)
 ## 🛣️ Roadmap
