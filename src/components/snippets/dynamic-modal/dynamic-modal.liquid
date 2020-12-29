@@ -1,14 +1,27 @@
-{%- comment -%}Assign Modal Variables{%- endcomment -%}
-{% assign id = "defaultModal" %}
-{% assign openModalBtn = "defaultOpenButton" %}
-{% assign title = "Modal Title" %}
-{% assign body = "Modal Body" %}
-{% assign buttonOne = null %}
-{% assign buttonOneStyle = "text-white bg-blue-500 hover:bg-blue-700" %}
-{% assign buttonOneFunction = "javascript:void(0);" %}
-{% assign buttonTwo = null %}
-{% assign buttonTwoStyle = "text-white bg-transparent hover:bg-blue-700 text-blue-500 hover:text-white border border-blue-500 hover:border-transparent" %}
-{% assign buttonTwoFunction = "javascript:void(0);" %}
+{%- comment -%}
+This snippet uses Variable Scope and can be re-used throughout the theme.
+To use this snippet in sections, add {%- include, key: value -%} with some assigned variables.
+For Example:
+=========================================================================
+{%- include "dynamic-modal",
+    id: "homePageTestModal",
+    openModalBtn: "testButton",
+    title: "Testing Title Variable",
+    body: "Testing the Dynamic Body Of the Modal..."
+-%}
+=========================================================================
+These 👆 will change the default assignments below 👇
+{%- endcomment -%}
+{%- assign id = "defaultModal" -%}
+{%- assign openModalBtn = "defaultOpenButton" -%}
+{%- assign title = "Modal Title" -%}
+{%- assign body = "Modal Body" -%}
+{%- assign buttonOne = null -%}
+{%- assign buttonOneStyle = "text-white bg-blue-500 hover:bg-blue-700" -%}
+{%- assign buttonOneFunction = "javascript:void(0);" -%}
+{%- assign buttonTwo = null -%}
+{%- assign buttonTwoStyle = "text-white bg-transparent hover:bg-blue-700 text-blue-500 hover:text-white border border-blue-500 hover:border-transparent" -%}
+{%- assign buttonTwoFunction = "javascript:void(0);" -%}
 
 <section class="hidden" id="{{ id }}">
     <div class="flex items-center justify-center fixed left-0 bottom-0 w-full h-full bg-black bg-opacity-75" id="modalContainer">
@@ -47,7 +60,6 @@
         </div>
     </div>
 </section>
-
 
 <script>
     // Assignments
