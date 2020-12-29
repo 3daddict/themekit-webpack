@@ -1,17 +1,1 @@
-<button class="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded" id="testButton">TEST MODAL</button>
-
 {{ content_for_index }}
-
-<section class="test z-50">
-    {% include "dynamic-modal", 
-    id: "homePageTestModal",
-    openModalBtn: "testButton",
-    title: "Testing Title Variable",
-    body: "Testing the Dynamic Body Of the Modal...",
-    buttonOne: "Alert",
-    buttonOneFunction: "alert('> do you struggle with impostor syndrome? Me: no I’m great at it')"
-    buttonTwo: "Close",
-    buttonTwoStyle: "text-white bg-red-500 hover:bg-red-700"
-    buttonTwoFunction: "modal.style.display = 'none';"
-    %}
-</section>

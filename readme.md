@@ -99,6 +99,33 @@ When in development mode `yarn start` hot module reloading is enabled. It watche
 ## Self-Signed Certificate
 In the event that you find the HMR assets are not loading and the requests to localhost:9000 are 404 you will need to approve or pass a valid certificate.<br>![image](https://user-images.githubusercontent.com/29803478/99157400-46787900-267d-11eb-96be-4796dbd01ef9.png)<br>To solve this issue you can open a new browser window and approve the SSL Certificate or pass a valid certificate as mentioned here [devServer.https](https://webpack.js.org/configuration/dev-server/#devserverhttps).
 
+## Variable Scope & Components
+This is not unique to this project but it's worth mentioning and creating a component example. See the `src/components/snippets/dynamic-modal/dynamic-modal.liquid` component. This is a simple modal that uses variable scope for data, styles and functions.
+In this file we assign some default variables.
+```html
+{% assign id = "defaultModal" %}
+{% assign openModalBtn = "defaultOpenButton" %}
+{% assign title = "Modal Title" %}
+{% assign body = "Modal Body" %}
+```
+Use this `dynamic-modal.liquid` component by creating a trigger element like a button with an id.
+```html
+<button id="testButton">Trigger Modal</button>
+```
+Next we include the modal in a section with declared variables. These will be scoped to the snippet and we now have a dynamic reusable modal component we can use throughout our theme.
+```html
+{% include "dynamic-modal", 
+    id: "homePageTestModal",
+    openModalBtn: "testButton",
+    title: "Testing Title Variable",
+    body: "Testing the Dynamic Body Of the Modal...",
+    buttonOne: "Alert",
+    buttonOneFunction: "alert('Q: Do you struggle with impostor syndrome? Me: no I’m great at it')"
+    buttonTwo: "Close",
+    buttonTwoStyle: "text-white bg-red-500 hover:bg-red-700"
+    buttonTwoFunction: "modal.style.display = 'none';"
+%}
+```
 ## 🛣️ Roadmap
 - [ ] Finalization and First Release
 - [x] Update copy-webpack-plugin to v6 [Issue #519](https://github.com/webpack-contrib/copy-webpack-plugin/issues/519) Thanks [@felixmosh](https://github.com/felixmosh)!
