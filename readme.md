@@ -126,6 +126,7 @@ Next we include the modal in a section with declared variables. These will be sc
     buttonTwoFunction: "modal.style.display = 'none';"
 %}
 ```
+Read more on this [Shopify Variable Scopes](https://ellodave.dev/blog/2019/5/24/shopify-variable-scopes/). If you find some good use cases for these please post them in the [discussion ideas category](https://github.com/3daddict/themekit-webpack/discussions/categories/ideas)
 ## 🛣️ Roadmap
 - [ ] Finalization and First Release
 - [x] Update copy-webpack-plugin to v6 [Issue #519](https://github.com/webpack-contrib/copy-webpack-plugin/issues/519) Thanks [@felixmosh](https://github.com/felixmosh)!
