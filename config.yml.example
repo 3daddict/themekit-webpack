@@ -6,7 +6,7 @@ development:
   ignore_files:
     - config/settings_data.json
 
-devServer:
+server:
   password:
   theme_id: ""
   store:

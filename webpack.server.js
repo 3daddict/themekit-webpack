@@ -45,7 +45,7 @@ const publicPath = `https://localhost:${port}/`;
                 onBuildStart: {
                     scripts: [
                         'echo -- Webpack build started 🛠',
-                        'shopify-themekit watch --env=devServer',
+                        'shopify-themekit watch --env=server',
                     ],
                     blocking: false,
                     parallel: true,
@@ -61,7 +61,7 @@ const publicPath = `https://localhost:${port}/`;
                         'echo -- Minifying TailwindCSS',
                         'cleancss -o dist/assets/tailwind.min.css.liquid dist/assets/tailwind.css.liquid',
                         'echo -- Deploying to theme ✈️',
-                        'shopify-themekit deploy --env=devServer',
+                        'shopify-themekit deploy --env=server',
                         'echo -- Deployment competed ✓',
                         'shopify-themekit open',
                     ],
