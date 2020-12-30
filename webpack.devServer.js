@@ -1,83 +1,51 @@
+const { merge } = require('webpack-merge');
+const common = require('./webpack.common.js');
 const path = require('path');
-const glob = require('glob');
-const { argv } = require('yargs');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const WebpackShellPluginNext = require('webpack-shell-plugin-next');
-const ESLintPlugin = require('eslint-webpack-plugin');
 
-
-const isDevMode = argv.mode === 'development';
-const stats = isDevMode ? 'errors-warnings' : { children: false };
 const port = 9000;
-const publicPath = isDevMode ? `https://localhost:${port}/` : '';
+const publicPath = `https://localhost:${port}/`;
 
-module.exports = {
-    stats: stats,
-    entry: glob.sync('./src/components/**/*.js').reduce((acc, path) => {
-        const entry = path.replace(/^.*[\\\/]/, '').replace('.js', '');
-        acc[entry] = path;
-        return acc;
-    }, {}),
-    output: {
+ module.exports = merge(common, {
+   mode: 'development',
+   devtool: 'inline-source-map',
+   output: {
         filename: './assets/bundle.[name].js',
         hotUpdateChunkFilename: './hot/[id].[fullhash].hot-update.js',
         hotUpdateMainFilename: './hot/[fullhash].hot-update.json',
         path: path.resolve(__dirname, 'dist'),
         publicPath,
     },
-    cache: false,
     module: {
-        rules: [
-            {
-                test: /\.(sc|sa|c)ss$/,
-                use: [
-                    isDevMode ? 'style-loader' : MiniCssExtractPlugin.loader,
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            url: false,
-                        },
+    rules: [
+        {
+            test: /\.(sc|sa|c)ss$/,
+            use: [
+                'style-loader',
+                {
+                    loader: 'css-loader',
+                    options: {
+                        url: false,
                     },
-                    'postcss-loader',
-                    {
-                        loader: 'sass-loader',
-                        options: {
-                            sourceMap: true,
-                        },
+                },
+                'postcss-loader',
+                {
+                    loader: 'sass-loader',
+                    options: {
+                        sourceMap: true,
                     },
-                ],
-            },
-            {
-                test: /\.(png|svg|jpg|gif)$/,
-                use: ['file-loader'],
-            },
-            {
-                test: /\.(woff|woff2|eot|ttf|otf)$/,
-                use: ['file-loader'],
-            },
-            {
-                test: /\.js$/,
-                exclude: /node_modules/,
-                use: ["babel-loader"]
-            },
-            
-        ],
-    },
+                },
+            ],
+        },
+    ],
+},
     plugins: [
-        new CleanWebpackPlugin({
-            cleanStaleWebpackAssets: false,
-        }),
-        new ESLintPlugin({
-            fix: true
-        }),
-        isDevMode &&
             new WebpackShellPluginNext({
                 onBuildStart: {
                     scripts: [
                         'echo -- Webpack build started 🛠',
-                        'shopify-themekit watch --env=development',
+                        'shopify-themekit watch --env=devServer',
                     ],
                     blocking: false,
                     parallel: true,
@@ -93,7 +61,7 @@ module.exports = {
                         'echo -- Minifying TailwindCSS',
                         'cleancss -o dist/assets/tailwind.min.css.liquid dist/assets/tailwind.css.liquid',
                         'echo -- Deploying to theme ✈️',
-                        'shopify-themekit deploy --env=development',
+                        'shopify-themekit deploy --env=devServer',
                         'echo -- Deployment competed ✓',
                         'shopify-themekit open',
                     ],
@@ -101,9 +69,6 @@ module.exports = {
                     parallel: false,
                 },
             }),
-        new MiniCssExtractPlugin({
-            filename: './assets/bundle.[name].css',
-        }),
         new CopyPlugin({
             patterns: [
                 {
@@ -116,8 +81,7 @@ module.exports = {
                         const targetFolder = diff.split(path.sep)[0];
                         return path.join(targetFolder, path.basename(absolutePath));
                     },
-                    transform: isDevMode
-                        ? function (content) {
+                    transform: function (content) {
                               content = content
                                   .toString()
                                   .replace(
@@ -136,7 +100,6 @@ module.exports = {
 
                               return content;
                           }
-                        : undefined,
                 },
                 {
                     from: 'src/assets/**/*',
@@ -153,7 +116,7 @@ module.exports = {
                 },
             ],
         }),
-    ].filter(Boolean),
+    ],
     devServer: {
         contentBase: path.join(__dirname, 'dist'),
         publicPath: '/',
@@ -171,4 +134,4 @@ module.exports = {
         overlay: true,
         writeToDisk: true,
     },
-};
+ });

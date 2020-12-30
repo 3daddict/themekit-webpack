@@ -1,3 +1,3 @@
 
-const themeFunction = () => 'Theme JS ES6 Function HMR TEST!';
+const themeFunction = () => 'Theme JS ES6 Function!';
 console.log(themeFunction());
