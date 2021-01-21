@@ -80,6 +80,13 @@ This project uses [TailwindCSS](https://tailwindcss.com/) `v2` a utility-first C
 # - "*.hot-update.json"
 ```
 
+## Webpack Dev Server WIP
+While we finalize a solution for the dev server the environments are broken out
+- `yarn start` will run build commands and open a preview in the browser
+- `yarn server` will run build commands and start the development server that is WIP. Once final this will merge into the start command.
+- `yarn build` will run build commands and create a dist folder of the compiled files.
+- `yarn deploy` will upload the dist folder contents to your theme configured in the yml
+
 ## Whitespace control
 In [Liquid](https://shopify.github.io/liquid/basics/whitespace/), you can include a hyphen in your tag syntax `{{-`, `-}}`, `{%-`, and `-%}` to strip whitespace from the left or right side of a rendered tag.
 By including hyphens in your `assign` tag, you can strip the generated whitespace from the rendered template.
