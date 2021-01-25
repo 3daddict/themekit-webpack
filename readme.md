@@ -1,6 +1,6 @@
 ![GitHub](https://img.shields.io/github/license/3daddict/themekit-webpack) ![GitHub issues](https://img.shields.io/github/issues/3daddict/themekit-webpack) ![GitHub watchers](https://img.shields.io/github/watchers/3daddict/themekit-webpack) ![GitHub Repo stars](https://img.shields.io/github/stars/3daddict/themekit-webpack) ![GitHub forks](https://img.shields.io/github/forks/3daddict/themekit-webpack) [![Github all releases](https://img.shields.io/github/downloads/3daddict/themekit-webpack/total.svg)](https://GitHub.com/3daddict/themekit-webpack/releases/)
 
-# Shopify ThemeKit with Webpack 4
+# Shopify ThemeKit with Webpack 5
 This is a starter Theme using Webpack, ThemeKit and TailwindCSS for developing Shopify themes with modern build tools. The goal is to create a tool with a component-based folder structure and is easy to use.
 
 ## Contributing
@@ -80,6 +80,13 @@ This project uses [TailwindCSS](https://tailwindcss.com/) `v2` a utility-first C
 # - "*.hot-update.json"
 ```
 
+## Webpack Dev Server WIP
+While we finalize a solution for the dev server the environments are broken out
+- `yarn start` will run build commands and open a preview in the browser
+- `yarn server` will run build commands and start the development server that is WIP. Once final this will merge into the start command.
+- `yarn build` will run build commands and create a dist folder of the compiled files.
+- `yarn deploy` will upload the dist folder contents to your theme configured in the yml
+
 ## Whitespace control
 In [Liquid](https://shopify.github.io/liquid/basics/whitespace/), you can include a hyphen in your tag syntax `{{-`, `-}}`, `{%-`, and `-%}` to strip whitespace from the left or right side of a rendered tag.
 By including hyphens in your `assign` tag, you can strip the generated whitespace from the rendered template.
@@ -99,6 +106,34 @@ When in development mode `yarn start` hot module reloading is enabled. It watche
 ## Self-Signed Certificate
 In the event that you find the HMR assets are not loading and the requests to localhost:9000 are 404 you will need to approve or pass a valid certificate.<br>![image](https://user-images.githubusercontent.com/29803478/99157400-46787900-267d-11eb-96be-4796dbd01ef9.png)<br>To solve this issue you can open a new browser window and approve the SSL Certificate or pass a valid certificate as mentioned here [devServer.https](https://webpack.js.org/configuration/dev-server/#devserverhttps).
 
+## Variable Scope & Components
+This is not unique to this project but it's worth mentioning and creating a component example. See the `src/components/snippets/dynamic-modal/dynamic-modal.liquid` component. This is a simple modal that uses variable scope for data, styles and functions.
+In this file we assign some default variables.
+```html
+{%- assign id = "defaultModal" -%}
+{%- assign openModalBtn = "defaultOpenButton" -%}
+{%- assign title = "Modal Title" -%}
+{%- assign body = "Modal Body" -%}
+```
+Use this `dynamic-modal.liquid` component by creating a trigger element like a button with an id.
+```html
+<button id="testButton">Trigger Modal</button>
+```
+Next we include the modal in a section with declared variables. These will be scoped to the snippet and we now have a dynamic reusable modal component we can use throughout our theme.
+```html
+{%- include "dynamic-modal", 
+    id: "homePageTestModal",
+    openModalBtn: "testButton",
+    title: "Testing Title Variable",
+    body: "Testing the Dynamic Body Of the Modal...",
+    buttonOne: "Alert",
+    buttonOneFunction: "alert('Q: Do you struggle with impostor syndrome? Me: no I’m great at it')"
+    buttonTwo: "Close",
+    buttonTwoStyle: "text-white bg-red-500 hover:bg-red-700"
+    buttonTwoFunction: "modal.style.display = 'none';"
+-%}
+```
+Read more on this [Shopify Variable Scopes](https://ellodave.dev/blog/2019/5/24/shopify-variable-scopes/). If you find some good use cases for these please post them in the [discussion ideas category](https://github.com/3daddict/themekit-webpack/discussions/categories/ideas)
 ## 🛣️ Roadmap
 - [ ] Finalization and First Release
 - [x] Update copy-webpack-plugin to v6 [Issue #519](https://github.com/webpack-contrib/copy-webpack-plugin/issues/519) Thanks [@felixmosh](https://github.com/felixmosh)!
