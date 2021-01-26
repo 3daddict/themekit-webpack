@@ -62,6 +62,7 @@ async function getStoreGlobalData() {
             },
         },
         collection: data.collections[0],
+        product: data.product,
     };
 }
 

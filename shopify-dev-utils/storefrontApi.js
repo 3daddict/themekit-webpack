@@ -2,9 +2,8 @@ const Axios = require('axios');
 
 class StorefrontApi {
     constructor({ baseURL, token }) {
-        console.log(`https://${baseURL}/api/2020-10/graphql`);
         this.axios = Axios.create({
-            baseURL: `https://${baseURL}/api/2020-10/graphql`,
+            baseURL: `https://${baseURL}/api/2021-01/graphql.json`,
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/graphql',
@@ -12,7 +11,7 @@ class StorefrontApi {
             },
         });
     }
-
+    // GQL query can be tested https://shopify.dev/graphiql/storefront-graphiql
     async getStoreData() {
         return this.axios
             .post(
@@ -66,6 +65,93 @@ class StorefrontApi {
             }
           }
         }
+      }
+    }
+  }
+  products(first: 10) {
+    edges {
+      node {
+        id
+        handle
+        createdAt
+        publishedAt
+        vendor
+        tags
+        description
+        descriptionHtml
+        title
+        tags
+        priceRange {
+          maxVariantPrice {
+            amount
+            currencyCode
+          }
+          minVariantPrice {
+            amount
+            currencyCode
+          }
+        }
+        compareAtPriceRange {
+          maxVariantPrice {
+            amount
+            currencyCode
+          }
+          minVariantPrice {
+            amount
+            currencyCode
+          }
+        }
+        options {
+          id
+          name
+          values
+        }
+        variants(first: 10) {
+          edges {
+            node {
+              id
+              title
+              sku
+              priceV2 {
+                amount
+                currencyCode
+              }
+              compareAtPriceV2 {
+                amount
+                currencyCode
+              }
+              selectedOptions {
+                name
+                value
+              }
+              availableForSale
+              quantityAvailable
+              requiresShipping
+              weight
+              image {
+                id
+                height
+                altText
+                width
+                originalSrc
+              }
+            }
+          }
+        }
+        productType
+        images(first: 10) {
+          edges {
+            node {
+              id
+              altText
+              height
+              width
+              originalSrc
+            
+            }
+          }
+        }
+        availableForSale
       }
     }
   }
