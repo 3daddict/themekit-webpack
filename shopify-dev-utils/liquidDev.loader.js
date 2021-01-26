@@ -9,6 +9,7 @@ const { defaultPagination } = require('./filters/default_pagination');
 const { scriptTag } = require('./filters/script_tag');
 const { stylesheetTag } = require('./filters/stylesheet_tag');
 const { assetUrl } = require('./filters/asset_url');
+const { imgUrl } = require('./filters/img_url');
 const { getStoreGlobalData } = require('./storeData');
 const { liquidSectionTags } = require('./section-tags/index');
 const { Paginate } = require('./tags/paginate');
@@ -45,6 +46,7 @@ function initEngine() {
             engine.registerFilter('within', within);
             engine.registerFilter('money_with_currency', moneyWithCurrency);
             engine.registerFilter('money_without_trailing_zeros', moneyWithoutTrailingZeros);
+            engine.registerFilter('img_url', imgUrl);
 
             engine.registerTag('paginate', Paginate);
             engine.registerTag('style', Style);
