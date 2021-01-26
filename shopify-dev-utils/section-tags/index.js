@@ -1,10 +1,11 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+'use strict';
+Object.defineProperty(exports, '__esModule', { value: true });
 exports.liquidSectionTags = void 0;
-const javascript_1 = require("./javascript");
-const schema_1 = require("./schema");
-const section_1 = require("./section");
-const stylesheet_1 = require("./stylesheet");
+const javascript_1 = require('./javascript');
+const schema_1 = require('./schema');
+const section_1 = require('./section');
+const stylesheet_1 = require('./stylesheet');
+
 function liquidSectionTags() {
     return function () {
         this.registerTag('section', section_1.Section);

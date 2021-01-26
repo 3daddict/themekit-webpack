@@ -12,6 +12,7 @@ const { assetUrl } = require('./filters/asset_url');
 const { getStoreGlobalData } = require('./storeData');
 const { liquidSectionTags } = require('./section-tags/index');
 const { Paginate } = require('./tags/paginate');
+const { Style } = require('./tags/style');
 
 let engine;
 let loadPromise;
@@ -46,6 +47,7 @@ function initEngine() {
             engine.registerFilter('money_without_trailing_zeros', moneyWithoutTrailingZeros);
 
             engine.registerTag('paginate', Paginate);
+            engine.registerTag('style', Style);
             engine.plugin(liquidSectionTags());
 
             resolve();
