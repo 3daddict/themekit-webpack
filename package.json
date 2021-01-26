@@ -7,8 +7,7 @@
   "author": "Mike Salvati",
   "private": true,
   "scripts": {
-    "start": "webpack --mode=development --config webpack.dev.js",
-    "server": "webpack serve --mode=development --config webpack.server.js",
+    "start": "webpack serve --mode=development --config webpack.dev.js",
     "build": "webpack --mode=production --config webpack.prod.js && npx tailwindcss build src/components/tailwind.css -o dist/assets/tailwind.css.liquid && cleancss -o dist/assets/tailwind.min.css.liquid dist/assets/tailwind.css.liquid",
     "deploy": "webpack --mode=production --config webpack.prod.js && npx tailwindcss build src/components/tailwind.css -o dist/assets/tailwind.css.liquid && cleancss -o dist/assets/tailwind.min.css.liquid dist/assets/tailwind.css.liquid && shopify-themekit deploy --env=production"
   },

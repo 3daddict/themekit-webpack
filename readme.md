@@ -51,6 +51,7 @@ For example a starting template for a `header.liquid` component would look like 
 <!-- Reference to compiled js in assets folder -->
 {{ 'bundle.header.js' | asset_url | script_tag }}
 ```
+**Note:** The scss or css file can alternatively be imported into the js file which will get compiled with webpack.
 ## Node Version Manager
 This theme setup is built with Yarn, Webpack and ThemeKit which are dependant on NodeJS versions.
 You can use node `v14` to install dependencies and run build commands.
@@ -80,12 +81,13 @@ This project uses [TailwindCSS](https://tailwindcss.com/) `v2` a utility-first C
 # - "*.hot-update.json"
 ```
 
-## Webpack Dev Server WIP
-While we finalize a solution for the dev server the environments are broken out
-- `yarn start` will run build commands and open a preview in the browser
-- `yarn server` will run build commands and start the development server that is WIP. Once final this will merge into the start command.
+## Webpack Dev Server
+- `yarn start` will run build commands and start the webpack development server.
 - `yarn build` will run build commands and create a dist folder of the compiled files.
 - `yarn deploy` will upload the dist folder contents to your theme configured in the yml
+
+## HMR (Hot Module Reloading)
+When in development mode `yarn start` hot module reloading is enabled. It watches for changes to `JavaScript`, `CSS` and `Liquid` files. When JS or CSS is changes the browser will change without the need to refresh. When changes are made to liquid files a manual browser reload is required.
 
 ## Whitespace control
 In [Liquid](https://shopify.github.io/liquid/basics/whitespace/), you can include a hyphen in your tag syntax `{{-`, `-}}`, `{%-`, and `-%}` to strip whitespace from the left or right side of a rendered tag.
@@ -99,12 +101,6 @@ If you don’t want any of your tags to print whitespace, as a general rule you 
   Hello there!
 {%- endif -%}
 ```
-
-## HMR (Hot Module Reloading)
-When in development mode `yarn start` hot module reloading is enabled. It watched for changes to `JavaScript`, `CSS` and `Liquid` files. When JS or CSS is changes the browser will change without the need to refresh. When changes are made to liquid files a manual browser reload is required.
-
-## Self-Signed Certificate
-In the event that you find the HMR assets are not loading and the requests to localhost:9000 are 404 you will need to approve or pass a valid certificate.<br>![image](https://user-images.githubusercontent.com/29803478/99157400-46787900-267d-11eb-96be-4796dbd01ef9.png)<br>To solve this issue you can open a new browser window and approve the SSL Certificate or pass a valid certificate as mentioned here [devServer.https](https://webpack.js.org/configuration/dev-server/#devserverhttps).
 
 ## Variable Scope & Components
 This is not unique to this project but it's worth mentioning and creating a component example. See the `src/components/snippets/dynamic-modal/dynamic-modal.liquid` component. This is a simple modal that uses variable scope for data, styles and functions.
@@ -134,8 +130,4 @@ Next we include the modal in a section with declared variables. These will be sc
 -%}
 ```
 Read more on this [Shopify Variable Scopes](https://ellodave.dev/blog/2019/5/24/shopify-variable-scopes/). If you find some good use cases for these please post them in the [discussion ideas category](https://github.com/3daddict/themekit-webpack/discussions/categories/ideas)
-## 🛣️ Roadmap
-- [ ] Finalization and First Release
-- [x] Update copy-webpack-plugin to v6 [Issue #519](https://github.com/webpack-contrib/copy-webpack-plugin/issues/519) Thanks [@felixmosh](https://github.com/felixmosh)!
-- [x] Webpack 5? 🤔 Thanks [@felixmosh](https://github.com/felixmosh)!
-- [X] TailwindCSS v2
+
