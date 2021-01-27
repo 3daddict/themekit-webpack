@@ -4,9 +4,13 @@ const { argv } = require('yargs');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
+const { transformLiquid } = require('./shopify-dev-utils/transformLiquid');
 
 const isDev = argv.mode === 'development';
 const stats = isDev ? 'errors-warnings' : { children: false };
+const port = 9000;
+const publicPath = `https://localhost:${port}/`;
 
 module.exports = {
     stats: stats,
@@ -16,8 +20,7 @@ module.exports = {
         return acc;
     }, {}),
     module: {
-        rules: [
-            {
+        rules: [{
                 test: /\.(png|svg|jpg|gif)$/,
                 use: ['file-loader'],
             },
@@ -41,6 +44,41 @@ module.exports = {
         }),
         new MiniCssExtractPlugin({
             filename: '/assets/bundle.[name].css',
-        })
+        }),
+        new CopyPlugin({
+            patterns: [{
+                    from: 'src/components/templates/customers/*.liquid',
+                    to: 'templates/customers/[name].[ext]',
+                },
+                {
+                    from: 'src/components/**/*.liquid',
+                    globOptions: {
+                        ignore: ['**/customers']
+                    },
+                    to: '[folder]/[name].[ext]',
+                    flatten: true,
+                    transformPath(targetPath, absolutePath) {
+                        const relativePath = path.join(__dirname, 'src/components');
+                        const diff = path.relative(relativePath, absolutePath);
+                        const targetFolder = diff.split(path.sep)[0];
+                        return path.join(targetFolder, path.basename(absolutePath));
+                    },
+                    transform: transformLiquid(publicPath),
+                },
+                {
+                    from: 'src/assets/**/*',
+                    to: 'assets/',
+                    flatten: true,
+                },
+                {
+                    from: 'src/config/*.json',
+                    to: 'config/[name].[ext]',
+                },
+                {
+                    from: 'src/locales/*.json',
+                    to: 'locales/[name].[ext]',
+                },
+            ],
+        }),
     ].filter(Boolean)
 };
