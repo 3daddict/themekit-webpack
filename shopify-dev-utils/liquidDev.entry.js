@@ -1,7 +1,7 @@
 const context = require.context(
     '../src',
     true,
-    /(collection|footer|featured-product|featured-collection|header|message)\.liquid$/
+    /(global-css|product|collection|footer|featured-product|featured-collection|header|message)\.liquid$/
 );
 
 const cache = {};
@@ -29,7 +29,7 @@ if (module.hot) {
         const newContext = require.context(
             '../src',
             true,
-            /(collection|footer|featured-product|featured-collection|header|message)\.liquid$/
+            /(global-css|product|collection|footer|featured-product|featured-collection|header|message)\.liquid$/
         );
         const changes = [];
         newContext.keys().forEach(function (key) {
