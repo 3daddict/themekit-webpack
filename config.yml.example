@@ -1,18 +1,40 @@
+# Copy or rename the config.yml.example to config.yml
+# You can find your shopify credentials by going to your Shopify admin and creating a Private App
+# See more info below on how to create a Private app and cloned themes
+
+# Credentials for yarn start
 development:
-  password:
+  password: 
   theme_id: ""
-  store:
-  storefront_api_key:
+  store: 
+  storefront_api_key: 
   directory: dist/
   ignore_files:
     - config/settings_data.json
     - "*.js"
     - "*.hot-update.json"
 
+# Credentials for yarn build & deploy
 production:
-  password:
+  password: 
   theme_id: ""
-  store:
+  store: 
   directory: dist/
   ignore_files:
     - config/settings_data.json
+
+########### Creating a Private App ###########
+# Click Apps from the admin sidebar
+# Scroll down to the bottom and click on Manage private apps
+# Create a new private app by clicking the button
+# Name your app and add an email
+# Under the Admin API expand the selection and scroll down to Themes, change to Read and write
+# Under the Storefront API check the checkbox: Allow this app to access your storefront data using the Storefront API
+# Click the save button and grab the credentials to add below for the yml config
+
+########### Cloning a Theme ###########
+# It's not recommended to work off your published theme
+# Duplicate a theme by going to Actions on your published theme and clicking Duplicate
+# Rename your theme and then click edit code
+# Look at the url and grab the theme id at the end of it for example: 116723349937
+# This is the theme id to add above in the yml config
