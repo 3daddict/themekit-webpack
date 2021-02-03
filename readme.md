@@ -86,8 +86,12 @@ This project uses [TailwindCSS](https://tailwindcss.com/) `v2` a utility-first C
 - `yarn build` will run build commands and create a dist folder of the compiled files.
 - `yarn deploy` will upload the dist folder contents to your theme configured in the yml
 
+## Self-Signed Certificate
+In the event that you find the HMR assets are not loading and the requests to localhost:9000 are 404 you will need to approve or pass a valid certificate.
+To solve this issue you can open a new browser window and approve the SSL Certificate or pass a valid certificate as mentioned here [devServer.https](https://webpack.js.org/configuration/dev-server/#devserverhttps).
+
 ## HMR (Hot Module Reloading)
-When in development mode `yarn start` hot module reloading is enabled. It watches for changes to `JavaScript`, `CSS` and `Liquid` files. When JS or CSS is changes the browser will change without the need to refresh. When changes are made to liquid files a manual browser reload is required.
+When in development mode `yarn start` hot module reloading is enabled. It watches for changes to `JavaScript`, `CSS` and `Liquid` files. When JS or CSS is changes the browser will change without the need to refresh. When changes are made to liquid files a manual browser reload may be required.
 
 ## Whitespace control
 In [Liquid](https://shopify.github.io/liquid/basics/whitespace/), you can include a hyphen in your tag syntax `{{-`, `-}}`, `{%-`, and `-%}` to strip whitespace from the left or right side of a rendered tag.
@@ -130,4 +134,3 @@ Next we include the modal in a section with declared variables. These will be sc
 -%}
 ```
 Read more on this [Shopify Variable Scopes](https://ellodave.dev/blog/2019/5/24/shopify-variable-scopes/). If you find some good use cases for these please post them in the [discussion ideas category](https://github.com/3daddict/themekit-webpack/discussions/categories/ideas)
-
