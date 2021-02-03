@@ -1,6 +1,4 @@
-const {
-    merge
-} = require('webpack-merge');
+const { merge } = require('webpack-merge');
 const common = require('./webpack.common.js');
 const CopyPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -13,25 +11,27 @@ module.exports = merge(common, {
         path: path.resolve(__dirname, 'dist'),
     },
     module: {
-        rules: [{
-            test: /\.(sc|sa|c)ss$/,
-            use: [
-                MiniCssExtractPlugin.loader,
-                {
-                    loader: 'css-loader',
-                    options: {
-                        url: false,
+        rules: [
+            {
+                test: /\.(sc|sa|c)ss$/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            url: false,
+                        },
                     },
-                },
-                'postcss-loader',
-                {
-                    loader: 'sass-loader',
-                    options: {
-                        sourceMap: true,
+                    'postcss-loader',
+                    {
+                        loader: 'sass-loader',
+                        options: {
+                            sourceMap: true,
+                        },
                     },
-                },
-            ],
-        }, ],
+                ],
+            },
+        ],
     },
     plugins: [
         new CopyPlugin({
@@ -47,19 +47,6 @@ module.exports = merge(common, {
                         return path.join(targetFolder, path.basename(absolutePath));
                     },
                     transform: undefined,
-                },
-                {
-                    from: 'src/assets/**/*',
-                    to: 'assets/',
-                    flatten: true,
-                },
-                {
-                    from: 'src/config/*.json',
-                    to: 'config/[name].[ext]',
-                },
-                {
-                    from: 'src/locales/*.json',
-                    to: 'locales/[name].[ext]',
                 },
             ],
         }),

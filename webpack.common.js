@@ -1,9 +1,9 @@
-const path = require('path');
 const glob = require('glob');
 const { argv } = require('yargs');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 const isDev = argv.mode === 'development';
 const stats = isDev ? 'errors-warnings' : { children: false };
@@ -41,6 +41,23 @@ module.exports = {
         }),
         new MiniCssExtractPlugin({
             filename: '/assets/bundle.[name].css',
+        }),
+        new CopyPlugin({
+            patterns: [
+                {
+                    from: 'src/assets/**/*',
+                    to: 'assets/',
+                    flatten: true,
+                },
+                {
+                    from: 'src/config/*.json',
+                    to: 'config/[name].[ext]',
+                },
+                {
+                    from: 'src/locales/*.json',
+                    to: 'locales/[name].[ext]',
+                },
+            ],
         }),
     ].filter(Boolean),
     optimization: {

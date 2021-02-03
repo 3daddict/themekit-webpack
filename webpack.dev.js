@@ -114,19 +114,6 @@ module.exports = merge(common, {
                     },
                     transform: transformLiquid(publicPath),
                 },
-                {
-                    from: 'src/assets/**/*',
-                    to: 'assets/',
-                    flatten: true,
-                },
-                {
-                    from: 'src/config/*.json',
-                    to: 'config/[name].[ext]',
-                },
-                {
-                    from: 'src/locales/*.json',
-                    to: 'locales/[name].[ext]',
-                },
             ],
         }),
     ],
