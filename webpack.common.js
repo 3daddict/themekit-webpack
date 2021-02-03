@@ -28,7 +28,7 @@ module.exports = {
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
-                use: ["babel-loader"]
+                use: ['babel-loader'],
             },
         ],
     },
@@ -37,10 +37,13 @@ module.exports = {
             cleanStaleWebpackAssets: false,
         }),
         new ESLintPlugin({
-            fix: true
+            fix: true,
         }),
         new MiniCssExtractPlugin({
             filename: '/assets/bundle.[name].css',
-        })
-    ].filter(Boolean)
+        }),
+    ].filter(Boolean),
+    optimization: {
+        runtimeChunk: { name: 'runtime' },
+    },
 };

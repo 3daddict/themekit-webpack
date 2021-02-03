@@ -7,6 +7,27 @@
     "theme_support_url": "https://github.com/Shopify/themekit/issues"
   },
   {
+    "name": "Developer",
+    "settings": [
+      {
+        "label": "Environment",
+        "id": "environment",
+        "type": "select",
+        "options": [
+          {
+            "label": "Development",
+            "value": "development"
+          },
+          {
+            "label": "Production",
+            "value": "production"
+          }
+        ],
+        "default": "production"
+      }
+    ]
+  },
+  {
     "name": "Pagination Settings",
     "settings": [{
         "type": "checkbox",

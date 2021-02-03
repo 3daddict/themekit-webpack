@@ -35,7 +35,9 @@
   {{ 'tailwind.min.css' | asset_url | stylesheet_tag }}
   {{ 'bundle.global-css.css' | asset_url | stylesheet_tag }}
   {{ 'bundle.runtime.js' | asset_url | script_tag }}
-  {{ 'bundle.liquidDev.js' | asset_url | script_tag }}
+  {% if settings.environment == 'development' %}
+    {{ 'bundle.liquidDev.js' | asset_url | script_tag }}
+  {% endif %}
   {{ 'bundle.theme.js' | asset_url | script_tag }}
 </head>
 <body id="{{ page_title | handle }}" class="template-{{ template.name | handle }}">

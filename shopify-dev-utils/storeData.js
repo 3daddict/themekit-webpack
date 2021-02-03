@@ -18,6 +18,7 @@ if (fs.existsSync(configFile)) {
 
 function getGlobalSettings() {
     const rawSettings = require('../src/config/settings_schema.json');
+    const overrides = { environment: 'development' };
 
     return rawSettings
         .filter((section) => !!section.settings)
@@ -25,7 +26,7 @@ function getGlobalSettings() {
             section.settings
                 .filter((setting) => !!setting.id && typeof setting.default !== 'undefined')
                 .forEach((setting) => {
-                    result[setting.id] = setting.default;
+                    result[setting.id] = overrides[setting.id] || setting.default;
                 });
             return result;
         }, {});

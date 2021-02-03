@@ -28,9 +28,6 @@ module.exports = merge(common, {
         publicPath,
     },
     cache: false,
-    optimization: {
-        runtimeChunk: { name: 'runtime' },
-    },
     module: {
         rules: [
             {
@@ -77,7 +74,10 @@ module.exports = merge(common, {
     plugins: [
         new WebpackShellPluginNext({
             onBuildStart: {
-                scripts: ['echo -- Webpack build started 🛠', 'shopify-themekit watch --env=development'],
+                scripts: [
+                    'echo -- Webpack build started 🛠',
+                    'shopify-themekit watch --env=development',
+                ],
                 blocking: false,
                 parallel: true,
             },
