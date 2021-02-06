@@ -8,19 +8,6 @@ To contribute to this repo please see
 - [CONTRIBUTING.md](https://github.com/3daddict/themekit-webpack/blob/master/CONTRIBUTING.md)
 - [CODE_OF_CONDUCT.md](https://github.com/3daddict/themekit-webpack/blob/master/CODE_OF_CONDUCT.md)
 
-## 🎯 Goals
-- [x] Component based folder structure
-- [x] ES6 Modules
-- [x] Chunk files
-- [x] Optimized and Minified code
-- [x] Hot Module Reloading - Thanks [@felixmosh](https://github.com/felixmosh)!
-- [ ] Lazy Loading
-- [x] Prettier Formatting
-- [x] Linter
-- [ ] Prefetch and Preload
-- [x] Fonts & Theme Setting
-- [x] [TailwindCSS](https://tailwindcss.com/)
-
 ## 📁 Folder Structure
 This is set up for a component-based file structure. All liquid, js and scss are in the same folder to keep things in one place.
 Example of folder structure:
