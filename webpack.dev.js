@@ -2,7 +2,9 @@ const { merge } = require('we' + 'bpack-merge');
 const glob = require('glob');
 const common = require('./webpack.common.js');
 const path = require('path');
+const CopyPlugin = require('copy-webpack-plugin');
 const WebpackShellPluginNext = require('webpack-shell-plugin-next');
+const { transformLiquid } = require('./shopify-dev-utils/transformLiquid');
 
 const port = 9000;
 const publicPath = `https://localhost:${port}/`;
@@ -26,9 +28,6 @@ module.exports = merge(common, {
         publicPath,
     },
     cache: false,
-    optimization: {
-        runtimeChunk: { name: 'runtime' },
-    },
     module: {
         rules: [
             {
@@ -75,7 +74,10 @@ module.exports = merge(common, {
     plugins: [
         new WebpackShellPluginNext({
             onBuildStart: {
-                scripts: ['echo -- Webpack build started 🛠', 'shopify-themekit watch --env=development'],
+                scripts: [
+                    'echo -- Webpack build started 🛠',
+                    'shopify-themekit watch --env=development',
+                ],
                 blocking: false,
                 parallel: true,
             },
@@ -97,6 +99,22 @@ module.exports = merge(common, {
                 blocking: true,
                 parallel: false,
             },
+        }),
+        new CopyPlugin({
+            patterns: [
+                {
+                    from: 'src/components/**/*.liquid',
+                    to: '[folder]/[name].[ext]',
+                    flatten: true,
+                    transformPath(targetPath, absolutePath) {
+                        const relativePath = path.join(__dirname, 'src/components');
+                        const diff = path.relative(relativePath, absolutePath);
+                        const targetFolder = diff.split(path.sep)[0];
+                        return path.join(targetFolder, path.basename(absolutePath));
+                    },
+                    transform: transformLiquid(publicPath),
+                },
+            ],
         }),
     ],
     devServer: {

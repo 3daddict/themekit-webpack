@@ -1,16 +1,12 @@
-const path = require('path');
 const glob = require('glob');
 const { argv } = require('yargs');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
-const { transformLiquid } = require('./shopify-dev-utils/transformLiquid');
 
 const isDev = argv.mode === 'development';
 const stats = isDev ? 'errors-warnings' : { children: false };
-const port = 9000;
-const publicPath = `https://localhost:${port}/`;
 
 module.exports = {
     stats: stats,
@@ -20,7 +16,8 @@ module.exports = {
         return acc;
     }, {}),
     module: {
-        rules: [{
+        rules: [
+            {
                 test: /\.(png|svg|jpg|gif)$/,
                 use: ['file-loader'],
             },
@@ -31,7 +28,7 @@ module.exports = {
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
-                use: ["babel-loader"]
+                use: ['babel-loader'],
             },
         ],
     },
@@ -40,31 +37,13 @@ module.exports = {
             cleanStaleWebpackAssets: false,
         }),
         new ESLintPlugin({
-            fix: true
+            fix: true,
         }),
         new MiniCssExtractPlugin({
             filename: '/assets/bundle.[name].css',
         }),
         new CopyPlugin({
-            patterns: [{
-                    from: 'src/components/templates/customers/*.liquid',
-                    to: 'templates/customers/[name].[ext]',
-                },
-                {
-                    from: 'src/components/**/*.liquid',
-                    globOptions: {
-                        ignore: ['**/customers']
-                    },
-                    to: '[folder]/[name].[ext]',
-                    flatten: true,
-                    transformPath(targetPath, absolutePath) {
-                        const relativePath = path.join(__dirname, 'src/components');
-                        const diff = path.relative(relativePath, absolutePath);
-                        const targetFolder = diff.split(path.sep)[0];
-                        return path.join(targetFolder, path.basename(absolutePath));
-                    },
-                    transform: transformLiquid(publicPath),
-                },
+            patterns: [
                 {
                     from: 'src/assets/**/*',
                     to: 'assets/',
@@ -80,5 +59,8 @@ module.exports = {
                 },
             ],
         }),
-    ].filter(Boolean)
+    ].filter(Boolean),
+    optimization: {
+        runtimeChunk: { name: 'runtime' },
+    },
 };
