@@ -77,6 +77,8 @@ This project uses [TailwindCSS](https://tailwindcss.com/) `v2` a utility-first C
 In the event that you find the HMR assets are not loading and the requests to localhost:9000 are 404 you will need to approve or pass a valid certificate.
 To solve this issue you can open a new browser window and approve the SSL Certificate or pass a valid certificate as mentioned here [devServer.https](https://webpack.js.org/configuration/dev-server/#devserverhttps).
 
+**Note:** a quick fix with Chrome `chrome://flags/#allow-insecure-localhost` change to enable
+
 ## HMR (Hot Module Reloading)
 When in development mode `yarn start` hot module reloading is enabled. It watches for changes to `JavaScript`, `CSS` and `Liquid` files. When JS or CSS is changes the browser will change without the need to refresh. When changes are made to liquid files a manual browser reload may be required.
 

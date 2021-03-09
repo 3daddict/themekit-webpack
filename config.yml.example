@@ -9,6 +9,8 @@ development:
   store: 
   storefront_api_key: 
   directory: dist/
+  # Note: when first deploying to a new theme you may have to comment out the ignore files.
+  # Then after first upload uncomment them.
   ignore_files:
     - config/settings_data.json
     - "*.js"

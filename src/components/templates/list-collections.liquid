@@ -26,10 +26,10 @@
   {%- if settings.pagination and paginate.pages > 1 -%}
   {%- comment -%}Pagination Control in Theme Settings{%- endcomment -%}
     {%- if settings.pagination_type == 'accessable_pagination' -%}
-    {% include 'accessible-pagination' %}
+      {%- render 'accessible-pagination' with { paginate: paginate} -%}
     {%- endif -%}
     {%- if settings.pagination_type == 'default_pagination' -%}
-    {% include 'default-pagination' %}
+      {%- render 'default-pagination' with { paginate: paginate} -%}
     {%- endif -%}
   {%- endif -%}
   {%- endpaginate -%}
