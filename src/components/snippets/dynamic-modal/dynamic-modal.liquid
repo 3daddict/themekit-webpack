@@ -1,30 +1,32 @@
 {%- comment -%}
 This snippet uses Variable Scope and can be re-used throughout the theme.
-To use this snippet in sections, add {%- include, key: value -%} with some assigned variables.
+To use this snippet in sections, add {%- render, key: value -%} with assigned variables.
 For Example:
+This is the target button id that will open the modal.
+<button id="modalBtn">TEST MODAL</button>
 =========================================================================
-{%- include "dynamic-modal",
-    id: "homePageTestModal",
-    openModalBtn: "testButton",
-    title: "Testing Title Variable",
-    body: "Testing the Dynamic Body Of the Modal..."
+Here is a render tag example to use in the section with some example variables declared.
+Note the openModalBtn matches the button element above which triggers the modal in this example.
+=========================================================================
+{%- render 'dynamic-modal', 
+  id: "testModal", 
+  openModalBtn: "modalBtn",
+  title: "Modal Title",
+  body: "Modal Body",
+  buttonOne: "Button One",
+  buttonOneStyle: "text-white bg-blue-500 hover:bg-blue-700",
+  buttonOneFunction: "javascript:void(0);",
+  buttonTwo: "Button Two",
+  buttonTwoStyle: "text-white bg-transparent hover:bg-blue-700 text-blue-500 hover:text-white border border-blue-500 hover:border-transparent",
+  buttonTwoFunction: "javascript:void(0);" 
 -%}
 =========================================================================
-These 👆 will change the default assignments below 👇
+id, openModalBtn, title and body are required. If you don't want buttons make the value = null.
+=========================================================================
 {%- endcomment -%}
-{%- assign id = "defaultModal" -%}
-{%- assign openModalBtn = "defaultOpenButton" -%}
-{%- assign title = "Modal Title" -%}
-{%- assign body = "Modal Body" -%}
-{%- assign buttonOne = null -%}
-{%- assign buttonOneStyle = "text-white bg-blue-500 hover:bg-blue-700" -%}
-{%- assign buttonOneFunction = "javascript:void(0);" -%}
-{%- assign buttonTwo = null -%}
-{%- assign buttonTwoStyle = "text-white bg-transparent hover:bg-blue-700 text-blue-500 hover:text-white border border-blue-500 hover:border-transparent" -%}
-{%- assign buttonTwoFunction = "javascript:void(0);" -%}
 
 <section class="hidden" id="{{ id }}">
-    <div class="flex items-center justify-center fixed left-0 bottom-0 w-full h-full bg-black bg-opacity-75" id="modalContainer">
+    <div class="flex items-center justify-center fixed left-0 bottom-0 w-full h-full bg-black bg-opacity-75 z-50" id="modalContainer">
         <div class="bg-white rounded-lg w-1/2">
             <div class="flex flex-col items-start p-4">
                 <div class="flex items-center w-full">
