@@ -30,7 +30,7 @@
 
   {%- comment -%}Varibles{%- endcomment -%}
   {{ content_for_header }}
-  {% include 'global-css' %}
+  {% render 'global-css' %}
 
   {{ 'tailwind.min.css' | asset_url | stylesheet_tag }}
   {{ 'bundle.global-css.css' | asset_url | stylesheet_tag }}

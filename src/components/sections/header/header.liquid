@@ -29,7 +29,7 @@
         {%- for link in linklists[section.settings.menu].links -%}
         {%- if link.links != blank -%}
         <li class="inline-block mt-0 mr-4">
-          <a href="{{ link.url }}">{{ link.title }}{%- include 'icon-arrow-down' -%}</a>
+          <a href="{{ link.url }}">{{ link.title }}</a>
           <ul class="text-sm flex-grow">
             {%- for childlink in link.links -%}
             <li class="inline-block mt-0 mr-4"><a href="{{ childlink.url }}">{{ childlink.title }}</a>
