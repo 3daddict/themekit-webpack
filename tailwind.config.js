@@ -1,19 +1,13 @@
-const mode = process.env.NODE_ENV === 'development' ? 'development' : 'production';
-
 module.exports = {
-  future: {
-    removeDeprecatedGapUtilities: true,
-    purgeLayersByDefault: true,
-  },
+  mode: 'jit',
   purge: {
-    enabled: mode === "development" ? false : true,
+    enabled: true,
     content: [
-      './dist/layout/*.liquid',
-      './dist/templates/*.liquid',
-      './dist/sections/*.liquid',
-      './dist/snippets/*.liquid',
+      './dist/**/*.liquid',
+      './src/**/*.{js,liquid}',
     ],
   },
+  darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {},
   },
