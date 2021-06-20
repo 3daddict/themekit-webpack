@@ -61,7 +61,7 @@ exports.Paginate = {
             .on('start', () => {
             const toknenizer = new liquidjs_1.Tokenizer(tagToken.args);
             const list = toknenizer.readValue();
-            const by = toknenizer.readWord();
+            const by = toknenizer.readIdentifier();
             const perPage = toknenizer.readValue();
             liquidjs_1.assert(list.size() &&
                 by.content === 'by' &&
