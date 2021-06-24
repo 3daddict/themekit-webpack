@@ -1,10 +1,10 @@
-<footer class="footer relative pt-1 border-b-2">
-  <div class="container mx-auto px-6">
+<footer class="relative pt-1 border-b-2 footer">
+  <div class="container px-6 mx-auto">
     <div class="sm:flex sm:mt-8">
-      <div class="mt-8 sm:mt-0 sm:w-full sm:px-8 flex flex-col md:flex-row justify-between">
+      <div class="flex flex-col justify-between mt-8 sm:mt-0 sm:w-full sm:px-8 md:flex-row">
         <div class="flex flex-col">
           {%- if section.settings.first_menu_enable -%}
-          <span class="font-bold text-gray-700 uppercase mb-2">{{ section.settings.first_title }}</span>
+          <span class="mb-2 font-bold text-gray-700 uppercase">{{ section.settings.first_title }}</span>
           {%- if linklists[footer_linklist].links.size > 0 -%}
           {%- assign first_linklist = section.settings.first_linklist -%}
           {%- for link in linklists[footer_linklist].links -%}
@@ -21,7 +21,7 @@
         </div>
         <div class="flex flex-col">
           {%- if section.settings.second_menu_enable -%}
-          <span class="font-bold text-gray-700 uppercase mb-2">{{ section.settings.second_title }}</span>
+          <span class="mb-2 font-bold text-gray-700 uppercase">{{ section.settings.second_title }}</span>
           {%- if linklists[footer_linklist].links.size > 0 -%}
           {%- assign second_linklist = section.settings.second_linklist -%}
           {%- for link in linklists[footer_linklist].links -%}
@@ -38,7 +38,7 @@
         </div>
         <div class="flex flex-col">
           {%- if section.settings.third_menu_enable -%}
-          <span class="font-bold text-gray-700 uppercase mb-2">{{ section.settings.third_title }}</span>
+          <span class="mb-2 font-bold text-gray-700 uppercase">{{ section.settings.third_title }}</span>
           {%- if linklists[footer_linklist].links.size > 0 -%}
           {%- assign third_linklist = section.settings.third_linklist -%}
           {%- for link in linklists[footer_linklist].links -%}
@@ -56,10 +56,10 @@
       </div>
     </div>
   </div>
-  <div class="container mx-auto px-6">
-    <div class="mt-16 border-t-2 border-gray-300 flex flex-col items-center">
-      <div class="sm:w-2/3 text-center py-6">
-        <p class="text-sm font-bold mb-2">
+  <div class="container px-6 mx-auto">
+    <div class="flex flex-col items-center mt-16 border-t-2 border-gray-300">
+      <div class="py-6 text-center sm:w-2/3">
+        <p class="mb-2 text-sm font-bold">
           <small>&copy; {{ 'now' | date: "%Y" }}, {{ shop.name | link_to: '/' }}. {{ powered_by_link }}</small>
         </p>
       </div>

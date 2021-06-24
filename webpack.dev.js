@@ -88,7 +88,7 @@ module.exports = merge(common, {
                 scripts: [
                     'echo -- Webpack build complete ✓',
                     'echo -- Building TailwindCSS...',
-                    'npx tailwindcss build src/components/tailwind.css -o dist/assets/tailwind.css.liquid',
+                    'npx tailwindcss build -i src/components/tailwind.css -o dist/assets/tailwind.css.liquid',
                     'echo -- Minifying TailwindCSS',
                     'cleancss -o dist/assets/tailwind.min.css.liquid dist/assets/tailwind.css.liquid',
                     'echo -- Deploying to theme ✈️',
