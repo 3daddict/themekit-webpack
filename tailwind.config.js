@@ -4,7 +4,7 @@ module.exports = {
     enabled: true,
     content: [
       './dist/**/*.liquid',
-      './src/**/*.{js,liquid}',
+      './dist/**/*.js',
     ],
   },
   darkMode: false, // or 'media' or 'class'
