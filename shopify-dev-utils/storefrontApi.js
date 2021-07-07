@@ -72,7 +72,11 @@ class StorefrontApi {
 }
 `
             )
-            .then(({ data }) => data);
+            .then(({ data }) => data)
+            .catch(err => {
+              console.log(err);
+              res.sendStatus(500);
+          });
     }
 }
 
