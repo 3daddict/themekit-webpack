@@ -2,10 +2,7 @@ module.exports = {
   mode: 'jit',
   purge: {
     enabled: true,
-    content: [
-      './dist/**/*.liquid',
-      './dist/**/*.js',
-    ],
+    content: ["./src/**/*.{js,liquid}"],
   },
   darkMode: false, // or 'media' or 'class'
   theme: {
@@ -14,3 +11,5 @@ module.exports = {
   variants: {},
   plugins: [],
 }
+
+//   purge: ["./src/**/*.{js,liquid}"],

@@ -1,20 +1,20 @@
 <section class="mx-3">
   {% paginate collection.products by 8 %}
     <h1>{{ collection.title }}</h1>
-    <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-4">
+    <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
     {% for product in collection.products %}
     <a class="mx-auto" href="{{ product.url | within: collection }}">
-      <div class="max-w-xs bg-white shadow-lg rounded-lg overflow-hidden my-6">
+      <div class="max-w-xs my-6 overflow-hidden bg-white rounded-lg shadow-lg">
         <div class="px-4 py-2">
-          <h2 class="text-gray-900 font-bold text-lg h-12 uppercase">{{ product.title }}</h2>
-          <p class="text-gray-600 text-sm mt-1">{{ product.description | strip_html | truncate: 40 }}</p>
+          <h2 class="h-12 text-lg font-bold text-gray-900 uppercase">{{ product.title }}</h2>
+          <p class="mt-1 text-sm text-gray-600">{{ product.description | strip_html | truncate: 40 }}</p>
         </div>
-        <img class="h-56 w-full object-cover mt-2" src="{{ product.featured_image.src | img_url: 'large' }}"
+        <img class="object-cover w-full h-56 mt-2" src="{{ product.featured_image.src | img_url: 'large' }}"
           alt="{{ product.featured_image.alt | escape }}" />
         <div class="flex items-center justify-between p-4">
-          <h1 class="text-gray-900 font-bold text-xl">{{ product.price | money_without_trailing_zeros }}</h1>
+          <h1 class="text-xl font-bold text-gray-900">{{ product.price | money_without_trailing_zeros }}</h1>
           <button
-            class="px-3 py-1 bg-gray-200 text-sm text-gray-900 font-semibold rounded">{%- if product.available -%}VIEW
+            class="px-3 py-1 text-sm font-semibold text-gray-900 bg-gray-200 rounded">{%- if product.available -%}VIEW
             ITEM{%- else -%}SOLD OUT{%- endif -%}</button>
         </div>
       </div>

@@ -87,10 +87,6 @@ module.exports = merge(common, {
             onBuildEnd: {
                 scripts: [
                     'echo -- Webpack build complete ✓',
-                    'echo -- Building TailwindCSS...',
-                    'npx tailwindcss build -i src/components/tailwind.css -o dist/assets/tailwind.css.liquid',
-                    'echo -- Minifying TailwindCSS',
-                    'cleancss -o dist/assets/tailwind.min.css.liquid dist/assets/tailwind.css.liquid',
                     'echo -- Deploying to theme ✈️',
                     'shopify-themekit deploy --env=development',
                     'echo -- Deployment competed ✓',

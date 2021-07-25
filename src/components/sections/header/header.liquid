@@ -1,6 +1,6 @@
 <section data-section-id="{{ section.id }}">
   {%-  if section.settings.announcement_bar_enabled -%}
-  <div class="announcement-bar-container text-center p-2">
+  <div class="p-2 text-center announcement-bar-container">
     {%-  if section.settings.announcement_bar_link != blank -%}
     <a href="{{ section.settings.announcement_bar_link }}">
       {{ section.settings.announcement_bar_text }}
@@ -10,7 +10,7 @@
     {%-  endif -%}
   </div>
   {%-  endif -%}
-  <nav class="nav-bar-container flex items-center justify-between flex-wrap p-6">
+  <nav class="flex flex-wrap items-center justify-between p-6 nav-bar-container">
     <div class="flex items-center flex-shrink-0 mr-6">
         {%- if section.settings.logo != blank -%}
             <div>
@@ -22,15 +22,15 @@
               </a>
         </div>
         {%- endif -%}
-        <a href="/"><span class="font-semibold text-xl tracking-tight">{{ shop.name }}</span></a>
+        <a href="/"><span class="text-xl font-semibold tracking-tight">{{ shop.name }}</span></a>
     </div>
-    <div class="flex-grow flex items-center w-auto">
-      <ul class="text-sm flex-grow">
+    <div class="flex items-center flex-grow w-auto">
+      <ul class="flex-grow text-sm">
         {%- for link in linklists[section.settings.menu].links -%}
         {%- if link.links != blank -%}
         <li class="inline-block mt-0 mr-4">
           <a href="{{ link.url }}">{{ link.title }}{%- include 'icon-arrow-down' -%}</a>
-          <ul class="text-sm flex-grow">
+          <ul class="flex-grow text-sm">
             {%- for childlink in link.links -%}
             <li class="inline-block mt-0 mr-4"><a href="{{ childlink.url }}">{{ childlink.title }}</a>
             </li>
