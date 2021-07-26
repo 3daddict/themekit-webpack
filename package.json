@@ -8,8 +8,8 @@
   "private": true,
   "scripts": {
     "start": "TAILWIND_MODE=watch webpack serve --mode=development --config webpack.dev.js",
-    "build": "webpack --mode=production --config webpack.prod.js && npx tailwindcss build src/components/tailwind.css -o dist/assets/tailwind.css.liquid && cleancss -o dist/assets/tailwind.min.css.liquid dist/assets/tailwind.css.liquid",
-    "deploy": "webpack --mode=production --config webpack.prod.js && npx tailwindcss build src/components/tailwind.css -o dist/assets/tailwind.css.liquid && cleancss -o dist/assets/tailwind.min.css.liquid dist/assets/tailwind.css.liquid && shopify-themekit deploy --env=production"
+    "build": "webpack --mode=production --config webpack.prod.js && npx tailwindcss build -i src/components/tailwind.css -o dist/assets/tailwind.css.liquid && cleancss -o dist/assets/tailwind.min.css.liquid dist/assets/tailwind.css.liquid",
+    "deploy": "webpack --mode=production --config webpack.prod.js && npx tailwindcss build -i src/components/tailwind.css -o dist/assets/tailwind.css.liquid && cleancss -o dist/assets/tailwind.min.css.liquid dist/assets/tailwind.css.liquid && shopify-themekit deploy --env=production"
   },
   "dependencies": {
     "validator": "^13.5.2"
