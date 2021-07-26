@@ -93,7 +93,7 @@ module.exports = merge(common, {
                     'cleancss -o dist/assets/tailwind.min.css.liquid dist/assets/tailwind.css.liquid',
                     'echo -- Deploying to theme ✈️',
                     'shopify-themekit deploy --env=development',
-                    'echo -- Deployment competed ✓',
+                    'echo -- Deployment completed ✓',
                     'shopify-themekit open',
                 ],
                 blocking: true,
