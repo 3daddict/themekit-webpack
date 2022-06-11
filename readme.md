@@ -1,7 +1,7 @@
 ![GitHub](https://img.shields.io/github/license/3daddict/themekit-webpack) ![GitHub issues](https://img.shields.io/github/issues/3daddict/themekit-webpack) ![GitHub watchers](https://img.shields.io/github/watchers/3daddict/themekit-webpack) ![GitHub Repo stars](https://img.shields.io/github/stars/3daddict/themekit-webpack) ![GitHub forks](https://img.shields.io/github/forks/3daddict/themekit-webpack) [![Github all releases](https://img.shields.io/github/downloads/3daddict/themekit-webpack/total.svg)](https://GitHub.com/3daddict/themekit-webpack/releases/)
 
-# Shopify ThemeKit with Webpack 5
-This is a starter Theme using Webpack, ThemeKit and TailwindCSS for developing Shopify themes with modern build tools. The goal is to create a tool with a component-based folder structure and is easy to use.
+# (Legacy) Shopify ThemeKit with Webpack 5
+This is a starter Theme using Webpack, ThemeKit and TailwindCSS for developing Shopify themes with modern build tools. The goal is to create a tool with a component-based folder structure and is easy to use. With the new Shopify CLI a Webpack Dev Server is no loger needed. Please refer to this new project for Shopify 2.0 theme: [webpack-shopify-cli](https://github.com/3daddict/webpack-shopify-cli)
 
 ## Contributing
 To contribute to this repo please see
